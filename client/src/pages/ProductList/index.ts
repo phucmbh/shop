@@ -1,3 +1,3 @@
-import ProducList from './ProducList'
+import ProducList from "./ProducList"
 
 export default ProducList
