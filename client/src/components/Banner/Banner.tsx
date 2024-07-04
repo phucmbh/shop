@@ -4,7 +4,7 @@ interface Props {
 
 const Banner = ({ children }: Props) => {
   return (
-    <div className="bg-orange">
+    <div className="bg-[#D20504]">
       <div className="mx-auto w-[1040px]">
         <div
           className={

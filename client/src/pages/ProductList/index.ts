@@ -1,3 +1,1 @@
-import ProducList from "./ProducList"
-
-export default ProducList
+export { default as ProductList } from './ProductList'

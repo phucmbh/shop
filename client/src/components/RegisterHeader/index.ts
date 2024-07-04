@@ -1,1 +1,1 @@
-export { default as RegisterHeader } from "./RegisterHeader"
+export { default as RegisterHeader } from './RegisterHeader'

@@ -1,16 +1,22 @@
-import { HTMLInputTypeAttribute } from "react"
-import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form"
+import { HTMLInputTypeAttribute } from 'react'
+import { FieldPath, FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form'
 
-interface Props<> {
+interface Props<TFieldValues extends FieldValues> {
   type: HTMLInputTypeAttribute
-  name: string
+  name: FieldPath<TFieldValues>
   placehoder?: string
   errorMessage?: string
-  register: UseFormRegister<any>
+  register: UseFormRegister<TFieldValues>
   rules?: RegisterOptions
 }
 
-const InputText = ({ type, errorMessage, placehoder, name, register }: Props) => {
+const InputText = <TFieldValues extends FieldValues>({
+  type,
+  errorMessage,
+  placehoder,
+  name,
+  register
+}: Props<TFieldValues>) => {
   return (
     <div className="mt-3">
       <input

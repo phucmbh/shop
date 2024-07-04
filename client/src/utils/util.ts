@@ -1,4 +1,4 @@
-import axios, { AxiosError, HttpStatusCode } from "axios"
+import axios, { AxiosError, HttpStatusCode } from 'axios'
 
 export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
   return axios.isAxiosError(error)

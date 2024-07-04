@@ -1,15 +1,20 @@
-import { Link } from "react-router-dom"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { useMutation } from "@tanstack/react-query"
+import { Link, useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
 
-import { Banner, InputText } from "@/components"
-import { LoginForm, LoginSchema } from "@/utils/validate"
-import { apiLogin } from "@/apis"
-import { isAxiosUnprocessableEntityError } from "@/utils/util"
-import { ApiResponse } from "@/@types/utils.type"
+import { Banner, Button, InputText } from '@/components'
+import { LoginForm, LoginSchema } from '@/utils/validate'
+import { apiLogin } from '@/apis'
+import { isAxiosUnprocessableEntityError } from '@/utils/util'
+import { ErrorResponse } from '@/@types/utils.type'
+import { useContext } from 'react'
+import { AppContext } from '@/context/app.context'
+import path from '@/constants/path'
 
 const Login = () => {
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -24,15 +29,19 @@ const Login = () => {
 
   const onSubmit = handleSubmit((data: LoginForm) => {
     loginMutation.mutate(data, {
-      onSuccess: (data) => console.log(data),
+      onSuccess: (data) => {
+        setIsAuthenticated(true)
+        setProfile(data.data.data.user)
+        navigate('/')
+      },
       onError: (error) => {
-        if (isAxiosUnprocessableEntityError<ApiResponse<LoginForm>>(error)) {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<LoginForm>>(error)) {
           const formError = error.response?.data.data
           if (formError)
             Object.keys(formError).forEach((key) =>
               setError(key as keyof LoginForm, {
                 message: formError[key as keyof LoginForm],
-                type: "server"
+                type: 'server'
               })
             )
         }
@@ -61,14 +70,18 @@ const Login = () => {
         />
 
         <div className="mt-3">
-          <button className="bg-orange hover:bg-orange/85 w-full px-2 py-4 text-center text-sm uppercase text-white">
+          <Button
+            className="flex w-full items-center justify-center gap-2  bg-orange px-2 py-4 text-sm uppercase text-white hover:bg-orange/85"
+            isLoading={loginMutation.isPending}
+            disabled={loginMutation.isPending}
+          >
             Đăng nhập
-          </button>
+          </Button>
         </div>
 
         <div className="mt-5 text-center">
           <span className="text-gray-400">Bạn mới biết đên shopee? </span>
-          <Link to="/register" className="text-orange">
+          <Link to={path.REGISTER} className="text-orange">
             Đăng kí
           </Link>
         </div>

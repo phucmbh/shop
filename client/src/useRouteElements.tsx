@@ -1,29 +1,67 @@
-import { useRoutes } from "react-router-dom"
-import ProducList from "./pages/ProductList"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import RegisterLayout from "./layouts/RegisterLayout/RegisterLayout"
+import { Navigate, Outlet, useRoutes } from 'react-router-dom'
+
+import { MainLayout, RegisterLayout } from './layouts'
+import { Login, ProductList, Profile, Register } from './pages'
+import { useContext } from 'react'
+import { AppContext } from './context/app.context'
+import path from './constants/path'
+
+function ProtectedRoute() {
+  const { isAuthenticated } = useContext(AppContext)
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
+}
+
+function RejectedRoute() {
+  const { isAuthenticated } = useContext(AppContext)
+  return !isAuthenticated ? <Outlet /> : <Navigate to="/" />
+}
 
 const useRouteElement = () => {
   const element = useRoutes([
     {
-      path: "/",
-      element: <ProducList />
+      path: '',
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: path.PROFILE,
+          element: (
+            <MainLayout>
+              <Profile />
+            </MainLayout>
+          )
+        }
+      ]
+    },
+
+    {
+      path: '',
+      element: <RejectedRoute />,
+      children: [
+        {
+          path: path.LOGIN,
+          element: (
+            <RegisterLayout>
+              <Login />
+            </RegisterLayout>
+          )
+        },
+        {
+          path: path.REGISTER,
+          element: (
+            <RegisterLayout>
+              <Register />
+            </RegisterLayout>
+          )
+        }
+      ]
     },
     {
-      path: "/login",
+      path: path.HOME,
+      index: true,
       element: (
-        <RegisterLayout>
-          <Login />
-        </RegisterLayout>
-      )
-    },
-    {
-      path: "/register",
-      element: (
-        <RegisterLayout>
-          <Register />
-        </RegisterLayout>
+        <MainLayout>
+          <ProductList />
+        </MainLayout>
       )
     }
   ])
