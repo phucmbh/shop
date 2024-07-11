@@ -1,13 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        orange: "#fb5533"
+        orange: '#fb5533'
       },
       backgroundImage: {
-        "register-banner": "url('/src/assets/images/register-background.jpg')"
+        'register-banner': "url('/src/assets/images/register-background.jpg')"
       }
     }
   },

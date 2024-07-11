@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { omit } from 'lodash'
 
-import { Banner, Button, InputText } from '@/components'
+import { Banner, Button, Input } from '@/components'
 import { isAxiosUnprocessableEntityError } from '@/utils/util'
 import { ErrorResponse } from '@/@types/utils.type'
 import { RegisterForm, RegisterSchema } from '@/utils/validate'
@@ -62,9 +62,9 @@ const Register = () => {
       <form className="rounded bg-white p-[30px] shadow-sm" onSubmit={onSubmit} noValidate>
         <div className="text-2xl">Đăng kí</div>
 
-        <InputText name="email" register={register} type="email" errorMessage={errors.email?.message} />
-        <InputText name="password" register={register} type="password" errorMessage={errors.password?.message} />
-        <InputText
+        <Input name="email" register={register} type="email" errorMessage={errors.email?.message} />
+        <Input name="password" register={register} type="password" errorMessage={errors.password?.message} />
+        <Input
           name="confirm_password"
           register={register}
           type="password"
@@ -73,7 +73,7 @@ const Register = () => {
 
         <div className="mt-3">
           <Button
-            className="flex w-full items-center justify-center gap-2 bg-orange px-2 py-4  text-sm uppercase text-white hover:bg-orange/85"
+            className="bg-orange hover:bg-orange/85 flex w-full items-center justify-center gap-2 px-2  py-4 text-sm uppercase text-white"
             isLoading={registerMutation.isPending}
             disabled={registerMutation.isPending}
           >

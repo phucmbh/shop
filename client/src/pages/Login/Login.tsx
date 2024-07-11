@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 
-import { Banner, Button, InputText } from '@/components'
+import { Banner, Button, Input } from '@/components'
 import { LoginForm, LoginSchema } from '@/utils/validate'
 import { apiLogin } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils/util'
@@ -53,15 +53,9 @@ const Login = () => {
       <form className="rounded bg-white p-10 shadow-sm" onSubmit={onSubmit} noValidate>
         <div className="text-2xl">Đăng nhập</div>
 
-        <InputText
-          type="email"
-          name="email"
-          register={register}
-          errorMessage={errors.email?.message}
-          placehoder="Email"
-        />
+        <Input type="email" name="email" register={register} errorMessage={errors.email?.message} placehoder="Email" />
 
-        <InputText
+        <Input
           type="password"
           name="password"
           register={register}
@@ -71,7 +65,7 @@ const Login = () => {
 
         <div className="mt-3">
           <Button
-            className="flex w-full items-center justify-center gap-2  bg-orange px-2 py-4 text-sm uppercase text-white hover:bg-orange/85"
+            className="bg-orange hover:bg-orange/85 flex w-full items-center  justify-center gap-2 px-2 py-4 text-sm uppercase text-white"
             isLoading={loginMutation.isPending}
             disabled={loginMutation.isPending}
           >

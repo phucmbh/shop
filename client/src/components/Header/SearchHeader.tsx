@@ -20,7 +20,7 @@ const SearchHeader = () => {
               className="grow border-none px-3 py-1 text-base text-black outline-none"
               placeholder="Free ship đơn từ không 0 Đ"
             />
-            <button className="flex-shirnk-0 rounded-sm bg-orange px-5 py-1 text-white">
+            <button className="flex-shirnk-0 bg-orange rounded-sm px-5 py-1 text-white">
               <IoIosSearch size={20} />
             </button>
           </div>
@@ -43,7 +43,7 @@ const SearchHeader = () => {
           popoverParent={
             <div className="relative w-10 cursor-pointer">
               <FiShoppingCart size={28} />
-              <span className="absolute right-0 top-[-5px] h-5 w-6 rounded-[2.75rem] border-2 border-orange  bg-white text-center text-orange ">
+              <span className="border-orange text-orange absolute right-0 top-[-5px] h-5 w-6 rounded-[2.75rem]  border-2 bg-white text-center ">
                 1
               </span>
             </div>
@@ -53,26 +53,23 @@ const SearchHeader = () => {
             {isAuthenticated ? (
               <div>
                 <p className=" p-2 text-sm capitalize text-gray-400"> Sản phẩm mới thêm</p>
-                <div className="  flex cursor-pointer p-2 hover:bg-gray-100">
+                <div className="  flex cursor-pointer gap-2 p-2 hover:bg-gray-100">
                   <div className="size-10 shrink-0 border">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lv720tga3qpl0b_tn"
-                      className=" bg-cover"
-                    />
+                    <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lv720tga3qpl0b_tn" />
                   </div>
 
-                  <div className=" ml-2 grow overflow-hidden">
+                  <div className="  overflow-hidden">
                     <div className="truncate text-sm">
                       Dầu Gội Biotin Collagen OGX Thick & Full 385ml Nuôi Dưỡng và Kích Thích Mọc Tóc; Cặp Gội Xả Biotin
                       Tím Madein Mỹ, Anh.
                     </div>
                   </div>
-                  <div className="flex-shirnk-0 ml-2">
+                  <div className="">
                     <span className="text-orange">₫172.000</span>
                   </div>
                 </div>
                 <div className="mt-6 flex items-center justify-end p-2">
-                  <Link to="/" className="rounded bg-orange px-5 py-2 capitalize text-white">
+                  <Link to="/" className="bg-orange rounded px-5 py-2 capitalize text-white">
                     Xem giỏ hàng
                   </Link>
                 </div>

@@ -28,7 +28,6 @@ const Popover = ({ children, popoverParent, initialOpen = false, placement = 'bo
   const hidePopover = () => {
     setIsOpen(false)
   }
-  const newClassName = `absolute bottom-full h-[${ARROW_HEIGHT}px]  w-full`
   return (
     <div ref={refs.setReference} onMouseEnter={showPopover} onMouseLeave={hidePopover}>
       {popoverParent}
@@ -49,7 +48,7 @@ const Popover = ({ children, popoverParent, initialOpen = false, placement = 'bo
               exit={{ opacity: 0, transform: 'scale(0)' }}
               transition={{ duration: 0.2 }}
             >
-              <span className={newClassName} />
+              <div className={`h-[${ARROW_HEIGHT}px] absolute bottom-full w-full`} />
               <FloatingArrow
                 ref={arrowRef}
                 context={context}

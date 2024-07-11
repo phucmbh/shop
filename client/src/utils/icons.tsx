@@ -30,5 +30,5 @@ export {
   MdKeyboardArrowDown,
   MdHelpOutline,
   FaFacebook,
-  RiInstagramFill
+  RiInstagramFill,
 }
