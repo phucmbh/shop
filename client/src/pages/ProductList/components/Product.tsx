@@ -1,46 +1,39 @@
-import { FaStar } from 'react-icons/fa6'
+import { Product as ProductType } from '@/@types'
+import { Rating } from '@/components'
+import { formatCurrency, formatNumberToSocialStyle } from '@/utils/util'
 import { Link } from 'react-router-dom'
 
-const Product = () => {
+interface Props {
+  product: ProductType
+}
+
+const Product = ({ product }: Props) => {
   return (
     <Link to="">
       <div className="flex h-full flex-col overflow-hidden rounded-sm bg-white shadow hover:-translate-y-0.5 hover:shadow-md">
         <div className="relative pt-[100%] ">
-          <img
-            className="absolute top-0 size-full   object-cover"
-            src="https://api-ecom.duthanhduoc.com/images/aa374023-7a5b-46ea-aca3-dad1b29fb015.jpg"
-            alt=""
-          />
+          <img className="absolute top-0 size-full   object-cover" src={product.image} alt={product.name} />
         </div>
 
         <div className="flex grow flex-col gap-3 p-2">
-          <div className="line-clamp-2 break-all text-xs">ĐIỆN THOẠI VSMART ACTIVE 3 6GB/64GB - HÀNG CHÍNH HÃNG</div>
+          <div className="line-clamp-2 break-all text-xs">{product.name}</div>
           <div className="mt-auto flex gap-1 text-sm">
             <div className="max-w-[50%] truncate text-gray-500 line-through">
               <span className=" text-xs">₫</span>
-              189.000
+              {formatCurrency(product.price_before_discount)}
             </div>
             <div className="text-orange max-w-[50%] truncate">
-              <span className="text-xs">₫</span>189.000
+              <span className="text-xs">₫</span>
+              {formatCurrency(product.price)}
             </div>
           </div>
           <div className="self-end">
-            <div className="flex items-center gap-2 self-end text-xs ">
-              <div className="flex items-center text-gray-200">
-                {Array(5)
-                  .fill(0)
-                  .map((_, index) => (
-                    <div className="relative" key={index}>
-                      <div className="absolute top-0 size-full overflow-hidden" style={{ width: '50%' }}>
-                        <FaStar className="text-yellow-400" />
-                      </div>
-                      <FaStar className="text-gray-300" />
-                    </div>
-                  ))}
-              </div>
+            <div className="flex items-center gap-2 text-xs ">
+              <Rating rating={product.rating} />
 
               <div>
-                <span className="">0 Đã bán</span>
+                <span>{formatNumberToSocialStyle(product.sold)}</span>
+                <span className="ml-1">Đã bán</span>
               </div>
             </div>
           </div>

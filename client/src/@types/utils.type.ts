@@ -1,4 +1,4 @@
-export interface ApiResponse<Data> {
+export interface SuccessResponse<Data> {
   message: string
   data: Data
 }

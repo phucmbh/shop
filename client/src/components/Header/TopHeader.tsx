@@ -10,16 +10,17 @@ import {
 
 import { Popover } from '../Popover'
 import { useMutation } from '@tanstack/react-query'
-import { apiLogout } from '@/apis'
+import { ApiAuth } from '@/apis'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
-import path from '@/constants/path'
+
 import { Button } from '../Button'
+import { PATH } from '@/constants'
 
 const TopHeader = () => {
   const { isAuthenticated, setIsAuthenticated, setProfile, profile } = useContext(AppContext)
   const logoutMutation = useMutation({
-    mutationFn: apiLogout,
+    mutationFn: ApiAuth.logout,
     onSuccess: () => {
       setIsAuthenticated(false)
       setProfile(null)
@@ -67,10 +68,10 @@ const TopHeader = () => {
               <h3>Đăng nhập để xem thông báo</h3>
             </div>
             <div className="grid grid-cols-2 text-center">
-              <Link to={path.LOGIN} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
+              <Link to={PATH.LOGIN} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
                 Đăng nhập
               </Link>
-              <Link to={path.REGISTER} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
+              <Link to={PATH.REGISTER} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
                 Đăng ký
               </Link>
             </div>
@@ -98,10 +99,10 @@ const TopHeader = () => {
 
         {!isAuthenticated && (
           <>
-            <Link to={path.REGISTER} className="border-r-2 border-gray-100/40 px-4  hover:text-gray-300">
+            <Link to={PATH.REGISTER} className="border-r-2 border-gray-100/40 px-4  hover:text-gray-300">
               Đăng kí
             </Link>
-            <Link to={path.LOGIN} className="px-4 hover:text-gray-300">
+            <Link to={PATH.LOGIN} className="px-4 hover:text-gray-300">
               Đăng nhập
             </Link>
           </>
@@ -117,7 +118,7 @@ const TopHeader = () => {
             }
           >
             <div className="relative flex  w-[150px] flex-col  items-start  rounded-sm bg-white text-sm ">
-              <Link to={path.PROFILE} className="w-full  px-2 py-3 hover:bg-slate-50 hover:text-cyan-500">
+              <Link to={PATH.PROFILE} className="w-full  px-2 py-3 hover:bg-slate-50 hover:text-cyan-500">
                 Tài khoản của tôi
               </Link>
               <Link to="/" className="w-full  px-2 py-3 hover:bg-slate-50 hover:text-cyan-500">

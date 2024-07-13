@@ -5,12 +5,12 @@ import { useMutation } from '@tanstack/react-query'
 
 import { Banner, Button, Input } from '@/components'
 import { LoginForm, LoginSchema } from '@/utils/validate'
-import { apiLogin } from '@/apis'
+import { ApiAuth } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils/util'
 import { ErrorResponse } from '@/@types/utils.type'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
-import path from '@/constants/path'
+import { PATH } from '@/constants'
 
 const Login = () => {
   const { setIsAuthenticated, setProfile } = useContext(AppContext)
@@ -24,7 +24,7 @@ const Login = () => {
     resolver: yupResolver(LoginSchema)
   })
   const loginMutation = useMutation({
-    mutationFn: (body: LoginForm) => apiLogin(body)
+    mutationFn: (body: LoginForm) => ApiAuth.login(body)
   })
 
   const onSubmit = handleSubmit((data: LoginForm) => {
@@ -53,14 +53,14 @@ const Login = () => {
       <form className="rounded bg-white p-10 shadow-sm" onSubmit={onSubmit} noValidate>
         <div className="text-2xl">Đăng nhập</div>
 
-        <Input type="email" name="email" register={register} errorMessage={errors.email?.message} placehoder="Email" />
+        <Input type="email" name="email" register={register} errorMessage={errors.email?.message} placeholder="Email" />
 
         <Input
           type="password"
           name="password"
           register={register}
           errorMessage={errors.password?.message}
-          placehoder="Password"
+          placeholder="Password"
         />
 
         <div className="mt-3">
@@ -75,7 +75,7 @@ const Login = () => {
 
         <div className="mt-5 text-center">
           <span className="text-gray-400">Bạn mới biết đên shopee? </span>
-          <Link to={path.REGISTER} className="text-orange">
+          <Link to={PATH.REGISTER} className="text-orange">
             Đăng kí
           </Link>
         </div>

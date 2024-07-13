@@ -1,8 +1,7 @@
 import { User } from '@/@types'
 import { AuthResponse } from '@/@types/auth'
-import path from '@/constants/path'
+import { PATH } from '@/constants'
 import LocalStorage from '@/utils/auth'
-// import { clearAccessTokenFromLS, getAccessTokenFromLS, saveAccessTokenToLS } from "@/utils/auth"
 import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios'
 import { toast } from 'react-toastify'
 
@@ -40,13 +39,13 @@ class Http {
         const { url } = response.config
         const data: AuthResponse = response.data
 
-        if (url === path.LOGIN || url === path.REGISTER) {
+        if (url === PATH.LOGIN || url === PATH.REGISTER) {
           this.accessToken = data.data.access_token // accessToken use in header request
           LocalStorage.setAccessToken(data.data.access_token)
           LocalStorage.setProfile(data.data.user)
         }
 
-        if (url === path.LOGOUT) {
+        if (url === PATH.LOGOUT) {
           this.accessToken = ''
           LocalStorage.clear()
         }

@@ -1,4 +1,4 @@
-enum path {
+export enum PATH {
   HOME = '/',
   PROFILE = '/profile',
   LOGIN = '/login',
@@ -6,4 +6,4 @@ enum path {
   LOGOUT = '/logout'
 }
 
-export default path
+

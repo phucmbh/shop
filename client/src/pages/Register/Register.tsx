@@ -8,10 +8,10 @@ import { Banner, Button, Input } from '@/components'
 import { isAxiosUnprocessableEntityError } from '@/utils/util'
 import { ErrorResponse } from '@/@types/utils.type'
 import { RegisterForm, RegisterSchema } from '@/utils/validate'
-import { apiRegister } from '@/apis'
+import { ApiAuth } from '@/apis'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
-import path from '@/constants/path'
+import { PATH } from '@/constants'
 
 type RegisterData = {
   email: string
@@ -31,7 +31,7 @@ const Register = () => {
   })
 
   const registerMutation = useMutation({
-    mutationFn: (body: RegisterData) => apiRegister(body)
+    mutationFn: (body: RegisterData) => ApiAuth.register(body)
   })
 
   const onSubmit = handleSubmit((data: RegisterForm) => {
@@ -83,7 +83,7 @@ const Register = () => {
 
         <div className="mt-5 text-center">
           <span className="text-gray-400">Bạn đã có tài khoản? </span>
-          <Link to={path.LOGIN} className="text-orange">
+          <Link to={PATH.LOGIN} className="text-orange">
             Đăng nhập
           </Link>
         </div>
