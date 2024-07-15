@@ -1,12 +1,12 @@
-import { URL } from '@/constants'
 import http from './http'
 import { Product, ProductList, ProductListConfig, SuccessResponse } from '@/@types'
 
-export const ApiProduct = {
+const URL = 'products'
+export const productApi = {
   getProducts(params: ProductListConfig) {
-    return http.get<SuccessResponse<ProductList>>(URL.PRODUCTS, { params })
+    return http.get<SuccessResponse<ProductList>>(URL, { params })
   },
   getProductDetail(id: string) {
-    return http.get<SuccessResponse<Product>>(`${URL.PRODUCTS}/${id}`)
+    return http.get<SuccessResponse<Product>>(`${URL}/${id}`)
   }
 }

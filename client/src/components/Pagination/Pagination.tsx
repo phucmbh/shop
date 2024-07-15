@@ -44,7 +44,7 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
     })
   }
   return (
-    <div className="mt-6 flex flex-wrap justify-center gap-1">
+    <div className="mt-6 flex flex-wrap items-center justify-center gap-1">
       {page === 1 ? (
         <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none">
           Prev

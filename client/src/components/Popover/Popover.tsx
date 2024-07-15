@@ -48,7 +48,7 @@ const Popover = ({ children, popoverParent, initialOpen = false, placement = 'bo
               exit={{ opacity: 0, transform: 'scale(0)' }}
               transition={{ duration: 0.2 }}
             >
-              <div className={`h-[${ARROW_HEIGHT}px] absolute bottom-full w-full`} />
+              <div className={`bg-red absolute bottom-full left-0   w-full `} style={{ height: `${ARROW_HEIGHT}px` }} />
               <FloatingArrow
                 ref={arrowRef}
                 context={context}

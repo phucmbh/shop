@@ -1,13 +1,9 @@
-export enum URL {
-  PRODUCT = 'product',
-  PRODUCTS = 'products'
-}
-
 export enum SORT_BY {
   CREATED_AT = 'createdAt',
   VIEW = 'view',
   SOLd = 'sold',
-  PRICE = 'price'
+  PRICE = 'price',
+  CATEGORY = 'category'
 }
 
 export enum ORDER {

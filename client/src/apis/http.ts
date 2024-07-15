@@ -1,5 +1,4 @@
-import { User } from '@/@types'
-import { AuthResponse } from '@/@types/auth'
+import { AuthResponse, User } from '@/@types'
 import { PATH } from '@/constants'
 import LocalStorage from '@/utils/auth'
 import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios'

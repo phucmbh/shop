@@ -33,7 +33,8 @@ export interface ProductListConfig {
   order?: 'asc' | 'desc'
   exclude?: 'string'
   rating_filter?: number | string
-  price_max?: number | string
   price_min?: number | string
+  price_max?: number | string
   name?: string
+  category?: string
 }

@@ -1,4 +1,4 @@
-import { AuthResponse } from '@/@types/auth'
+import { AuthResponse } from '@/@types';
 import http from './http'
 import { PATH } from '@/constants'
 

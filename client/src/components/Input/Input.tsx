@@ -10,19 +10,18 @@ interface InputProps<T extends FieldValues> extends React.InputHTMLAttributes<HT
 }
 
 const Input = <T extends FieldValues>({
-  type,
   errorMessage,
-  placeholder,
   name,
   register,
   rules,
   classNameInput = 'w-full rounded-sm border border-gray-300 p-3 outline-none focus:border-gray-500 focus:shadow-sm',
-  classNameError = 'mt-1 min-h-5 text-sm text-red-600'
+  classNameError = 'mt-1 min-h-5 text-sm text-red-600',
+  ...rest
 }: InputProps<T>) => {
-  const registerResult = name ? register(name, rules) : {}
+  const registerResult = name ? register(name, rules) : null
   return (
     <div className="mt-3">
-      <input type={type} className={classNameInput} autoComplete="on" placeholder={placeholder} {...registerResult} />
+      <input className={classNameInput} {...registerResult} {...rest} />
       <div className={classNameError}>{errorMessage}</div>
     </div>
   )
