@@ -13,7 +13,7 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
   const page = Number(queryConfig.page)
   const pagination = usePagination({ pageSize, page })
 
-  const baseStyle = 'hover:border-orange cursor-pointer rounded border bg-white px-2 py-1 shadow-sm hover:border'
+  const baseStyle = 'hover:border-orange cursor-pointer rounded border  px-2 py-1 shadow-sm hover:border'
 
   const renderPagination = () => {
     return pagination.map((pageNumber, index) => {
@@ -23,7 +23,6 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
             ...
           </span>
         )
-
       return (
         <Link
           to={{
@@ -35,7 +34,8 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
           }}
           key={index}
           className={clsx(baseStyle, {
-            ' bg-[#fb5533] text-white': +pageNumber === page
+            'bg-orange  text-white': +pageNumber === page,
+            'bg-white': +pageNumber !== page
           })}
         >
           {pageNumber}
@@ -58,7 +58,7 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
               page: (page - 1).toString()
             }).toString()
           }}
-          className={baseStyle}
+          className={clsx(baseStyle, 'bg-white')}
         >
           Prev
         </Link>
@@ -78,7 +78,7 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
               page: (page + 1).toString()
             }).toString()
           }}
-          className={baseStyle}
+          className={clsx(baseStyle, 'bg-white')}
         >
           Next
         </Link>

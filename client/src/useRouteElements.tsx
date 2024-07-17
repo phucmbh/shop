@@ -5,6 +5,7 @@ import { Login, ProductList, Profile, Register } from './pages'
 import { useContext } from 'react'
 import { AppContext } from './context/app.context'
 import { PATH } from './constants'
+import { ProductDetail } from './pages/ProductDetail'
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -61,6 +62,15 @@ const useRouteElement = () => {
       element: (
         <MainLayout>
           <ProductList />
+        </MainLayout>
+      )
+    },
+    {
+      path: `${PATH.PRODUCTS}/:id`,
+      index: true,
+      element: (
+        <MainLayout>
+          <ProductDetail />
         </MainLayout>
       )
     }

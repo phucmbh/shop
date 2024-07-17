@@ -46,8 +46,9 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
           <span>Sắp xếp theo</span>
 
           <button
-            className={clsx('bg-white px-3 py-1 shadow-sm hover:bg-gray-100', {
-              ' bg-[#fb5533] text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.VIEW)
+            className={clsx('px-3 py-1 shadow-sm ', {
+              ' bg-orange text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.VIEW),
+              'bg-white hover:bg-gray-100': !isSortByActive(SORT_BY.VIEW)
             })}
             onClick={() => handleSort(SORT_BY.VIEW)}
           >
@@ -55,8 +56,9 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
           </button>
 
           <button
-            className={clsx('bg-white px-3 py-1 shadow-sm hover:bg-gray-100', {
-              ' bg-[#fb5533] text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.CREATED_AT)
+            className={clsx(' px-3 py-1 shadow-sm ', {
+              ' bg-orange text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.CREATED_AT),
+              ' bg-white  hover:bg-gray-100': !isSortByActive(SORT_BY.CREATED_AT)
             })}
             onClick={() => handleSort(SORT_BY.CREATED_AT)}
           >
@@ -64,8 +66,9 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
           </button>
 
           <button
-            className={clsx('] bg-white px-3 py-1 shadow-sm hover:bg-gray-100', {
-              ' bg-[#fb5533] text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.SOLd)
+            className={clsx(']  px-3 py-1 shadow-sm ', {
+              ' bg-[#fb5533] text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.SOLd),
+              ' bg-white hover:bg-gray-100': !isSortByActive(SORT_BY.SOLd)
             })}
             onClick={() => handleSort(SORT_BY.SOLd)}
           >

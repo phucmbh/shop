@@ -3,7 +3,6 @@ export enum PATH {
   PROFILE = '/profile',
   LOGIN = '/login',
   REGISTER = '/register',
-  LOGOUT = '/logout'
+  LOGOUT = '/logout',
+  PRODUCTS = '/products',
 }
-
-

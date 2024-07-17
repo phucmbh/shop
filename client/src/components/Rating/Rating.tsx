@@ -1,10 +1,12 @@
-import { FaStar } from 'react-icons/fa6'
+import { IoMdStar } from 'react-icons/io'
 
 type Props = {
   rating: number
+  activeClassName?: string
+  noneActiveClassName?: string
 }
 
-const Rating = ({ rating }: Props) => {
+const Rating = ({ rating, activeClassName = 'text-yellow-400', noneActiveClassName = 'text-gray-300' }: Props) => {
   function ratingToRatingPercentList(rating: number) {
     const ratingPercents = []
     for (let i = 1; i <= 5; i++) {
@@ -23,9 +25,9 @@ const Rating = ({ rating }: Props) => {
       {ratingToRatingPercentList(rating).map((percent, index) => (
         <div className="relative" key={index}>
           <div className="absolute top-0 size-full overflow-hidden" style={{ width: percent }}>
-            <FaStar className="text-yellow-400" />
+            <IoMdStar className={activeClassName} />
           </div>
-          <FaStar className="text-gray-300" />
+          <IoMdStar className={noneActiveClassName} />
         </div>
       ))}
     </div>

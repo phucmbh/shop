@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { QueryConfig } from '../ProductList'
+import { IoMdRemove } from 'react-icons/io'
 
 interface Props {
   queryConfig: QueryConfig
@@ -18,6 +19,10 @@ const PriceFilter = ({ queryConfig }: Props) => {
     control,
     trigger
   } = useForm({
+    defaultValues: {
+      price_min: '',
+      price_max: ''
+    },
     resolver: yupResolver(PriceSchema)
   })
 
@@ -34,7 +39,7 @@ const PriceFilter = ({ queryConfig }: Props) => {
   return (
     <form onSubmit={onSubmit} className="my-4 border border-b-gray-400">
       <div>Khoảng giá</div>
-      <div className="mt-2 flex  ">
+      <div className="mt-2 flex items-center ">
         <Controller
           control={control}
           name="price_min"
@@ -56,7 +61,9 @@ const PriceFilter = ({ queryConfig }: Props) => {
           }}
         />
 
-        <div className="mt-4 px-5">-</div>
+        <div className="px-5 text-gray-500">
+          <IoMdRemove />
+        </div>
 
         <Controller
           control={control}
