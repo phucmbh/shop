@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 
 import { Banner, Button, Input } from '@/components'
-import { LoginForm, LoginSchema } from '@/utils/validate'
+import { LoginSchemaType, LoginSchema } from '@/utils/validate'
 import { ApiAuth } from '@/apis'
 import { isAxiosUnprocessableEntityError } from '@/utils/util'
 import { ErrorResponse } from '@/@types/utils.type'
@@ -20,14 +20,14 @@ const Login = () => {
     handleSubmit,
     setError,
     formState: { errors }
-  } = useForm<LoginForm>({
+  } = useForm<LoginSchemaType>({
     resolver: yupResolver(LoginSchema)
   })
   const loginMutation = useMutation({
-    mutationFn: (body: LoginForm) => ApiAuth.login(body)
+    mutationFn: (body: LoginSchemaType) => ApiAuth.login(body)
   })
 
-  const onSubmit = handleSubmit((data: LoginForm) => {
+  const onSubmit = handleSubmit((data: LoginSchemaType) => {
     loginMutation.mutate(data, {
       onSuccess: (data) => {
         setIsAuthenticated(true)
@@ -35,12 +35,12 @@ const Login = () => {
         navigate('/')
       },
       onError: (error) => {
-        if (isAxiosUnprocessableEntityError<ErrorResponse<LoginForm>>(error)) {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<LoginSchemaType>>(error)) {
           const formError = error.response?.data.data
           if (formError)
             Object.keys(formError).forEach((key) =>
-              setError(key as keyof LoginForm, {
-                message: formError[key as keyof LoginForm],
+              setError(key as keyof LoginSchemaType, {
+                message: formError[key as keyof LoginSchemaType],
                 type: 'server'
               })
             )

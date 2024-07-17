@@ -1,20 +1,20 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
-import { QueryConfig } from '../ProductList'
+
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { ORDER, PATH, SORT_BY } from '@/constants'
-import { ProductListConfig } from '@/@types'
+import { ProductListConfig, ProductQueryConfig } from '@/@types'
 import clsx from 'clsx'
 import { omit } from 'lodash'
 
 type Props = {
-  queryConfig: QueryConfig
+  queryConfig: ProductQueryConfig
   pageSize: number
 }
 
 const SortProductList = ({ queryConfig, pageSize }: Props) => {
   const navigate = useNavigate()
   const page = Number(queryConfig.page)
-  const { sort_by, order } = queryConfig
+  const { sort_by = SORT_BY.CREATED_AT, order } = queryConfig
 
   const isSortByActive = (sortByValue: Exclude<ProductListConfig['sort_by'], undefined>) => {
     return sort_by === sortByValue

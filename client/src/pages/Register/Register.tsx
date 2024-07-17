@@ -7,7 +7,7 @@ import { omit } from 'lodash'
 import { Banner, Button, Input } from '@/components'
 import { isAxiosUnprocessableEntityError } from '@/utils/util'
 import { ErrorResponse } from '@/@types/utils.type'
-import { RegisterForm, RegisterSchema } from '@/utils/validate'
+import { RegisterSchemaType, RegisterSchema } from '@/utils/validate'
 import { ApiAuth } from '@/apis'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
@@ -26,7 +26,7 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
     setError
-  } = useForm<RegisterForm>({
+  } = useForm<RegisterSchemaType>({
     resolver: yupResolver(RegisterSchema)
   })
 
@@ -34,7 +34,7 @@ const Register = () => {
     mutationFn: (body: RegisterData) => ApiAuth.register(body)
   })
 
-  const onSubmit = handleSubmit((data: RegisterForm) => {
+  const onSubmit = handleSubmit((data: RegisterSchemaType) => {
     const body = omit(data, ['confirm_password'])
     registerMutation.mutate(body, {
       onSuccess: (data) => {

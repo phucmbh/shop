@@ -17,4 +17,4 @@ export const RegisterSchema = Yup.object({
     .oneOf([Yup.ref('password')], 'Nhập lại password không đúng')
 })
 
-export type RegisterForm = Yup.InferType<typeof RegisterSchema>
+export type RegisterSchemaType = Yup.InferType<typeof RegisterSchema>

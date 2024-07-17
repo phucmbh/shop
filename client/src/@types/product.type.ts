@@ -39,3 +39,7 @@ export interface ProductListConfig {
   name?: string
   category?: string
 }
+
+export type ProductQueryConfig = {
+  [key in keyof ProductListConfig]: string
+}

@@ -8,14 +8,14 @@ import { MdArrowRight } from 'react-icons/md'
 import { omit } from 'lodash'
 
 import { Button } from '@/components'
-import { QueryConfig } from '../ProductList'
 import { PATH } from '@/constants'
 import { categoryApi } from '@/apis/category.api'
 import RatingFilter from './RatingFilter'
 import PriceFilter from './PriceFilter'
+import { ProductQueryConfig } from '@/@types'
 
 interface Props {
-  queryConfig: QueryConfig
+  queryConfig: ProductQueryConfig
 }
 
 const AsideFilter = ({ queryConfig }: Props) => {

@@ -1,9 +1,9 @@
+import { ProductQueryConfig } from '@/@types'
 import { PATH } from '@/constants'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { QueryConfig } from '../ProductList'
 
 interface Props {
-  queryConfig: QueryConfig
+  queryConfig: ProductQueryConfig
 }
 const RatingFilter = ({ queryConfig }: Props) => {
   const navigate = useNavigate()

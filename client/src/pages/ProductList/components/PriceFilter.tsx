@@ -4,11 +4,11 @@ import { PriceSchema } from '@/utils/validate'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import { createSearchParams, useNavigate } from 'react-router-dom'
-import { QueryConfig } from '../ProductList'
 import { IoMdRemove } from 'react-icons/io'
+import { ProductQueryConfig } from '@/@types'
 
 interface Props {
-  queryConfig: QueryConfig
+  queryConfig: ProductQueryConfig
 }
 
 const PriceFilter = ({ queryConfig }: Props) => {

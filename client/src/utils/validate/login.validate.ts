@@ -12,4 +12,4 @@ export const LoginSchema = Yup.object({
     .max(160, 'Độ dài từ 5 -160 kí tự')
 })
 
-export type LoginForm = Yup.InferType<typeof LoginSchema>
+export type LoginSchemaType = Yup.InferType<typeof LoginSchema>

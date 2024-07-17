@@ -1,7 +1,7 @@
 import { Product } from '@/@types'
 import clsx from 'clsx'
-import { useEffect, useMemo, useState } from 'react'
-import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { RiArrowLeftWideLine, RiArrowRightWideLine } from 'react-icons/ri'
 
 interface Props {
   product: Product
@@ -10,6 +10,7 @@ interface Props {
 const ProductImage = ({ product }: Props) => {
   const [imageListIndex, setImageListIndex] = useState([0, 5])
   const [activeImage, setActiveImage] = useState('')
+  const imageRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     if (product.images.length > 0) setActiveImage(product.images[0])
@@ -21,14 +22,12 @@ const ProductImage = ({ product }: Props) => {
   const canClickNext = () => imageListIndex[1] < product.images.length
 
   const prev = () => {
-    console.log('previous')
     if (canClickPre()) {
       setImageListIndex((prev) => [prev[0] - 1, prev[1] - 1])
     }
   }
 
   const next = () => {
-    console.log('next')
     if (canClickNext()) {
       setImageListIndex((prev) => [prev[0] + 1, prev[1] + 1])
     }
@@ -38,12 +37,44 @@ const ProductImage = ({ product }: Props) => {
     setActiveImage(img)
   }
 
+  const handleZoom = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const image = imageRef.current as HTMLImageElement
+    const { naturalHeight, naturalWidth } = image
+    // Cách 1: Lấy offsetX, offsetY đơn giản khi chúng ta đã xử lý được bubble event
+    // const { offsetX, offsetY } = event.nativeEvent
+
+    // Cách 2: Lấy offsetX, offsetY khi chúng ta không xử lý được bubble event
+    const offsetX = event.pageX - (rect.x + window.scrollX)
+    const offsetY = event.pageY - (rect.y + window.scrollY)
+
+    const top = offsetY * (1 - naturalHeight / rect.height)
+    const left = offsetX * (1 - naturalWidth / rect.width)
+    image.style.width = naturalWidth + 'px'
+    image.style.height = naturalHeight + 'px'
+    image.style.maxWidth = 'unset'
+    image.style.top = top + 'px'
+    image.style.left = left + 'px'
+  }
+
+  const handleRemoveZoom = () => {
+    imageRef.current?.removeAttribute('style')
+  }
+
   return (
     <div>
-      <div className="relative w-full pt-[100%] shadow">
-        <img src={activeImage} alt={product.name} className="absolute left-0 top-0 size-full bg-white object-cover" />
+      <div
+        className="relative w-full cursor-zoom-in overflow-hidden pt-[100%] shadow"
+        onMouseMove={handleZoom}
+        onMouseLeave={handleRemoveZoom}
+      >
+        <img
+          src={activeImage}
+          alt={product.name}
+          className="pointer-events-none absolute left-0 top-0 size-full  bg-white object-cover"
+          ref={imageRef}
+        />
       </div>
-      <div onClick={() => alert('uwu')}>kkk</div>
       <div className="relative mt-4 grid grid-cols-5 gap-2">
         <button
           onClick={prev}
@@ -52,7 +83,7 @@ const ProductImage = ({ product }: Props) => {
             'bg-black/10 cursor-not-allowed': !canClickPre()
           })}
         >
-          <MdOutlineKeyboardArrowLeft />
+          <RiArrowLeftWideLine size={20} />
         </button>
 
         <button
@@ -62,13 +93,13 @@ const ProductImage = ({ product }: Props) => {
             'bg-black/10 cursor-not-allowed': !canClickNext()
           })}
         >
-          <MdOutlineKeyboardArrowRight />
+          <RiArrowRightWideLine size={20} />
         </button>
 
         {imageList.map((img, index) => {
           const isActive = img === activeImage
           return (
-            <div className=" relative size-full pt-[100%]" key={index} onMouseEnter={() => chooseImage(img)}>
+            <div className=" relative size-full pt-[100%] " key={index} onMouseEnter={() => chooseImage(img)}>
               <img
                 src={img}
                 alt={product.name}

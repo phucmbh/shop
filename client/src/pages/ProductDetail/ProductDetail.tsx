@@ -1,14 +1,17 @@
 import { productApi } from '@/apis'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { ProductDescription, ProductImage, ProductInformation } from './components'
+import { ProductDescription, ProductImage, ProductInformation, RelatedProduct } from './components'
+import { getIdFromSlugify } from '@/utils/util'
 
 const ProductDetail = () => {
   const { id } = useParams()
+  const productId: string = getIdFromSlugify(id as string)
+  console.log(productId)
 
   const { data: productDetailData } = useQuery({
-    queryKey: ['products', id],
-    queryFn: () => productApi.getProductDetail(id as string)
+    queryKey: ['products', productId],
+    queryFn: () => productApi.getProductDetail(productId)
   })
 
   const product = productDetailData?.data.data
@@ -31,6 +34,10 @@ const ProductDetail = () => {
           </div>
           <div className="container mt-8 bg-white p-4 shadow">
             <ProductDescription product={product} />
+          </div>
+
+          <div className="container mt-8 bg-white p-4 shadow">
+            <RelatedProduct product={product} />
           </div>
         </div>
       )}

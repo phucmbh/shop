@@ -1,29 +1,54 @@
 import { FiShoppingCart, IconShopee, IoIosSearch } from '@/utils/icons'
-import { Link } from 'react-router-dom'
+import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { Popover } from '../Popover'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
+import useProductQueryConfig from '@/hook/useProductQueryConfig'
+import { PATH, SORT_BY } from '@/constants'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { searchSchema, SearchSchemaType } from '@/utils/validate'
+import { omit } from 'lodash'
 
 const SearchHeader = () => {
   const { isAuthenticated } = useContext(AppContext)
+  const productQueryConfig = useProductQueryConfig()
+  const navigate = useNavigate()
+
+  const { register, handleSubmit } = useForm<SearchSchemaType>({
+    resolver: yupResolver(searchSchema)
+  })
+
+  const omitValue = () => (productQueryConfig.sort_by === SORT_BY.PRICE ? ['sort_by', 'order'] : ['order'])
+
+  const onSubmit = handleSubmit((data) => {
+    navigate({
+      pathname: PATH.HOME,
+      search: createSearchParams(omit({ ...productQueryConfig, name: data.search }, omitValue())).toString()
+    })
+  })
+
   return (
     <div className="mt-4 grid grid-cols-12 items-center">
-      <Link to="/" className="col-span-2 mr-10 ">
+      <Link to={PATH.HOME} className="col-span-2 mr-10 ">
         <IconShopee />
       </Link>
-      <form className="col-span-8 mr-9">
+      <div className="col-span-8 mr-9">
         <div>
-          <div className="flex rounded-sm bg-white p-[2px]">
-            <input
-              type="text"
-              name="search"
-              className="grow border-none px-3 py-1 text-base text-black outline-none"
-              placeholder="Free ship đơn từ không 0 Đ"
-            />
-            <button className="flex-shirnk-0 bg-orange rounded-sm px-5 py-1 text-white">
-              <IoIosSearch size={20} />
-            </button>
-          </div>
+          <form onSubmit={onSubmit}>
+            <div className="flex rounded-sm bg-white p-[2px]">
+              <input
+                type="text"
+                className="grow border-none px-3 py-1 text-base text-black outline-none"
+                placeholder="Free ship đơn từ không 0 Đ"
+                {...register('search')}
+              />
+              <button className="flex-shirnk-0 bg-orange rounded-sm px-5 py-1 text-white">
+                <IoIosSearch size={20} />
+              </button>
+            </div>
+          </form>
+
           <div className="mt-2">
             <Link to="/" className="mr-4">
               Săn iPhone 14 Pro Max 1k
@@ -37,7 +62,7 @@ const SearchHeader = () => {
             <Link to="/">Quạt tích điện</Link>
           </div>
         </div>
-      </form>
+      </div>
       <div className="col-span-1 justify-self-end">
         <Popover
           popoverParent={

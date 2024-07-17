@@ -6,6 +6,11 @@ export enum SORT_BY {
   CATEGORY = 'category'
 }
 
+/**
+ * THREE_MINUTES = 3 * 60 * 1000
+ */
+export const THREE_MINUTES = 3 * 60 * 1000
+
 export enum ORDER {
   ASC = 'asc',
   DESC = 'desc'

@@ -24,3 +24,23 @@ export function formatNumberToSocialStyle(value: number) {
 
 export const percentDiscount = (price_before_discount: number, price: number) =>
   Math.round(((price_before_discount - price) / price_before_discount) * 100) + '%'
+
+export const removeSpecialCharacter = (str: string) =>
+  // eslint-disable-next-line no-useless-escape
+  str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, '')
+
+const KEY_WORD = '-i.'
+
+export const genarateSlugify = ({ name, id }: { name: string; id: string }) => {
+  return (
+    removeSpecialCharacter(name)
+      .trim()
+      .replace(/\s/g, '-') // remove consecutive hyphens
+      .replace(/-+/g, '-') + `${KEY_WORD + id}`
+  )
+}
+
+export const getIdFromSlugify = (slugify: string) => {
+  const arr = slugify.split(KEY_WORD)
+  return arr[arr.length - 1]
+}
