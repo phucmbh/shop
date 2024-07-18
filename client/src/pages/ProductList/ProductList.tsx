@@ -3,12 +3,11 @@ import { AsideFilter, SortProductList } from './components'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { productApi } from '@/apis'
 import { ProductListConfig } from '@/@types'
-import useProductQueryConfig from '@/hook/useProductQueryConfig'
 import { THREE_MINUTES } from '@/constants'
+import { useProductQueryConfig } from '@/hook'
 
 const ProductList = () => {
   const productQueryConfig = useProductQueryConfig()
-  console.log(productQueryConfig)
 
   const { data: productsData } = useQuery({
     queryKey: ['products', productQueryConfig],

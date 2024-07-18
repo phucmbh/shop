@@ -2,9 +2,7 @@ import clsx from 'clsx'
 import { useQuery } from '@tanstack/react-query'
 
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
-import { FaList } from 'react-icons/fa6'
-import { CiFilter } from 'react-icons/ci'
-import { MdArrowRight } from 'react-icons/md'
+import { MdArrowRight, CiFilter, FaList } from '@/utils/icons'
 import { omit } from 'lodash'
 
 import { Button } from '@/components'

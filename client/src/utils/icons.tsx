@@ -1,9 +1,11 @@
 import { FiShoppingCart } from 'react-icons/fi'
 import { IoIosSearch, IoMdNotificationsOutline } from 'react-icons/io'
-import { MdHelpOutline, MdKeyboardArrowDown } from 'react-icons/md'
-import { RiGlobalLine } from 'react-icons/ri'
-import { FaFacebook } from 'react-icons/fa6'
-import { RiInstagramFill } from 'react-icons/ri'
+import { MdHelpOutline, MdKeyboardArrowDown, MdArrowRight } from 'react-icons/md'
+import { RiInstagramFill, RiGlobalLine } from 'react-icons/ri'
+import { IoShieldCheckmarkSharp } from 'react-icons/io5'
+import { FaShippingFast } from 'react-icons/fa'
+import { FaCartPlus, FaList, FaFacebook } from 'react-icons/fa6'
+import { CiFilter } from 'react-icons/ci'
 
 type Props = {
   className?: string
@@ -31,4 +33,10 @@ export {
   MdHelpOutline,
   FaFacebook,
   RiInstagramFill,
+  IoShieldCheckmarkSharp,
+  FaShippingFast,
+  FaCartPlus,
+  FaList,
+  CiFilter,
+  MdArrowRight
 }

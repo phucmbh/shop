@@ -1,11 +1,12 @@
-import { PATH } from '@/constants'
-import usePagination from '@/hook/usePagination'
-import { QueryConfig } from '@/pages/ProductList/ProductList'
-import { clsx } from 'clsx'
 import { createSearchParams, Link } from 'react-router-dom'
 
+import { ProductQueryConfig } from '@/@types'
+import { PATH } from '@/constants'
+import { usePagination } from '@/hook'
+import { clsx } from 'clsx'
+
 interface Props {
-  queryConfig: QueryConfig
+  queryConfig: ProductQueryConfig
   pageSize: number
 }
 

@@ -4,11 +4,14 @@ import { Popover } from '../Popover'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
 import useProductQueryConfig from '@/hook/useProductQueryConfig'
-import { PATH, SORT_BY } from '@/constants'
+import { PATH, PURCHASES_STATUS, SORT_BY } from '@/constants'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { searchSchema, SearchSchemaType } from '@/utils/validate'
 import { omit } from 'lodash'
+import { useQuery } from '@tanstack/react-query'
+import { purchaseApi } from '@/apis'
+import { formatCurrency } from '@/utils/util'
 
 const SearchHeader = () => {
   const { isAuthenticated } = useContext(AppContext)
@@ -27,6 +30,14 @@ const SearchHeader = () => {
       search: createSearchParams(omit({ ...productQueryConfig, name: data.search }, omitValue())).toString()
     })
   })
+
+  const { data: purchasesInCartData } = useQuery({
+    queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }],
+    queryFn: () => purchaseApi.getPurchases({ status: PURCHASES_STATUS.IN_CART })
+  })
+
+  const purchasesInCart = purchasesInCartData?.data.data
+  const SHOW_MAXIMUM_PRODUCTS = 5
 
   return (
     <div className="mt-4 grid grid-cols-12 items-center">
@@ -64,49 +75,54 @@ const SearchHeader = () => {
         </div>
       </div>
       <div className="col-span-1 justify-self-end">
-        <Popover
-          popoverParent={
-            <div className="relative w-10 cursor-pointer">
-              <FiShoppingCart size={28} />
-              <span className="border-orange text-orange absolute right-0 top-[-5px] h-5 w-6 rounded-[2.75rem]  border-2 bg-white text-center ">
-                1
-              </span>
-            </div>
-          }
-        >
-          <div className="flex max-h-[250px] w-[400px] flex-col rounded-sm bg-white  shadow">
-            {isAuthenticated ? (
-              <div>
-                <p className=" p-2 text-sm capitalize text-gray-400"> Sản phẩm mới thêm</p>
-                <div className="  flex cursor-pointer gap-2 p-2 hover:bg-gray-100">
-                  <div className="size-10 shrink-0 border">
-                    <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lv720tga3qpl0b_tn" />
-                  </div>
+        {purchasesInCart && (
+          <Popover
+            popoverParent={
+              <div className="relative w-10 cursor-pointer">
+                <FiShoppingCart size={28} />
+                <span className="border-orange text-orange absolute right-0 top-[-5px] h-5 w-6 rounded-[2.75rem]  border-2 bg-white text-center ">
+                  {purchasesInCart.length}
+                </span>
+              </div>
+            }
+          >
+            <div className="flex max-h-[250px] w-[400px] flex-col rounded-sm   shadow">
+              {isAuthenticated ? (
+                <div className=" border border-gray-400/50  ">
+                  <div className="rounded-sm bg-white pb-2">
+                    <p className=" p-2 text-sm capitalize text-gray-400"> Sản phẩm mới thêm</p>
+                    {purchasesInCart.slice(0, SHOW_MAXIMUM_PRODUCTS).map((purchase) => (
+                      <div className="  flex cursor-pointer gap-2 p-2 hover:bg-gray-100" key={purchase._id}>
+                        <div className="size-10 shrink-0 border">
+                          <img src={purchase.product.image} />
+                        </div>
 
-                  <div className="  overflow-hidden">
-                    <div className="truncate text-sm">
-                      Dầu Gội Biotin Collagen OGX Thick & Full 385ml Nuôi Dưỡng và Kích Thích Mọc Tóc; Cặp Gội Xả Biotin
-                      Tím Madein Mỹ, Anh.
+                        <div className="  overflow-hidden">
+                          <div className="truncate text-sm">{purchase.product.name}</div>
+                        </div>
+                        <div className="">
+                          <span className="text-orange text-sm">{`₫${formatCurrency(purchase.product.price)}`}</span>
+                        </div>
+                      </div>
+                    ))}
+
+                    <div className="flex items-center justify-between p-2">
+                      <p className="text-sm text-gray-500">{`${purchasesInCart.length > SHOW_MAXIMUM_PRODUCTS ? purchasesInCart.length - SHOW_MAXIMUM_PRODUCTS : ''} Thêm vào giỏ hàng`}</p>
+                      <Link to="/" className="bg-orange rounded px-5 py-2 capitalize text-white">
+                        Xem giỏ hàng
+                      </Link>
                     </div>
                   </div>
-                  <div className="">
-                    <span className="text-orange">₫172.000</span>
-                  </div>
                 </div>
-                <div className="mt-6 flex items-center justify-end p-2">
-                  <Link to="/" className="bg-orange rounded px-5 py-2 capitalize text-white">
-                    Xem giỏ hàng
-                  </Link>
+              ) : (
+                <div className=" flex h-[250px] flex-col items-center justify-center">
+                  <img src="/no_product.png" className="size-[120px]" />
+                  <h3>Chưa Có Sản Phẩm</h3>
                 </div>
-              </div>
-            ) : (
-              <div className=" flex h-[250px] flex-col items-center justify-center">
-                <img src="/no_product.png" className="size-[120px]" />
-                <h3>Chưa Có Sản Phẩm</h3>
-              </div>
-            )}
-          </div>
-        </Popover>
+              )}
+            </div>
+          </Popover>
+        )}
       </div>
     </div>
   )

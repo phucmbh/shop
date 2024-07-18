@@ -7,7 +7,6 @@ import { getIdFromSlugify } from '@/utils/util'
 const ProductDetail = () => {
   const { id } = useParams()
   const productId: string = getIdFromSlugify(id as string)
-  console.log(productId)
 
   const { data: productDetailData } = useQuery({
     queryKey: ['products', productId],

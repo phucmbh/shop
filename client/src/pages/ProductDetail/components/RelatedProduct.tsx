@@ -10,8 +10,6 @@ interface Props {
 
 const RelatedProduct = ({ product }: Props) => {
   const queryConfig = { category: product.category._id, page: '1', limit: '20' }
-  console.log(product)
-  console.log(queryConfig)
 
   const { data: productsData } = useQuery({
     queryKey: ['products', queryConfig],

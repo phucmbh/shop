@@ -55,7 +55,7 @@ const Popover = ({ children, popoverParent, initialOpen = false, placement = 'bo
                 fill="white"
                 width={ARROW_WIDTH}
                 height={ARROW_HEIGHT}
-                style={{ transform: 'translateY(-1px)' }}
+                style={{ transform: 'translateY(-2px)' }}
               />
               {children}
             </motion.div>
