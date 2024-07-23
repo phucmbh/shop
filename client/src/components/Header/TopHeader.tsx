@@ -17,6 +17,7 @@ import { AppContext } from '@/context/app.context'
 import { Button } from '../Button'
 import { PATH, PURCHASES_STATUS } from '@/constants'
 import { noproductImage } from '@/utils/images'
+import { getUrlAvatar } from '@/utils/util'
 
 interface Props {
   className?: string
@@ -133,8 +134,8 @@ const TopHeader = ({ className }: Props) => {
             {isAuthenticated && (
               <Popover
                 popoverParent={
-                  <div className="flex  cursor-pointer items-center gap-1">
-                    <img src={profile?.avatar || 'https://placehold.co/25x25'} alt="" className="rounded-full" />
+                  <div className="flex cursor-pointer items-center gap-1">
+                    <img src={getUrlAvatar(profile?.avatar)} alt="" className="size-8 rounded-full" />
                     <span>{profile?.email}</span>
                   </div>
                 }

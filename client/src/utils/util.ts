@@ -44,3 +44,7 @@ export const getIdFromSlugify = (slugify: string) => {
   const arr = slugify.split(KEY_WORD)
   return arr[arr.length - 1]
 }
+
+export const getUrlAvatar = (name?: string) => {
+  return name ? 'https://api-ecom.duthanhduoc.com/images/' + name : 'https://placehold.co/400'
+}

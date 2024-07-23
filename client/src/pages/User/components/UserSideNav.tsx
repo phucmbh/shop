@@ -1,17 +1,21 @@
 import { PATH } from '@/constants'
 import { FaPen } from 'react-icons/fa'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { userSideNav } from '../user.constant'
 import clsx from 'clsx'
+import { useContext } from 'react'
+import { AppContext } from '@/context/app.context'
+import { getUrlAvatar } from '@/utils/util'
 
 const UserSideNav = () => {
   const location = useLocation()
+  const { profile } = useContext(AppContext)
 
   return (
     <div className="min-w-[550px]">
       <div className="flex items-center border-b border-b-gray-200 py-4">
         <Link to={PATH.PROFILE} className="size-12 shrink-0 overflow-hidden rounded-full border border-gray-500">
-          <img src="https://placehold.co/400" alt="" className="size-full  object-cover" />
+          <img src={getUrlAvatar(profile?.avatar)} alt="" className="size-full object-cover" />
         </Link>
         <div className="grow pl-2">
           <div className="font-semibold">phucmbh</div>
@@ -22,16 +26,15 @@ const UserSideNav = () => {
       </div>
       <div className="mt-5">
         {userSideNav.map((item, index) => (
-          <Link
+          <NavLink
             key={index}
             to={item.path}
-            className={clsx(
-              'hover:text-orange mb-2 flex items-center gap-3',
-              item.path === location.pathname && 'text-orange'
-            )}
+            className={({ isActive }) =>
+              clsx('hover:text-orange mb-2 flex items-center gap-3', isActive && 'text-orange')
+            }
           >
             <span>{item.icon}</span> <span>{item.text}</span>
-          </Link>
+          </NavLink>
         ))}
       </div>
     </div>
