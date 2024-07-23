@@ -8,11 +8,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AppProvider } from './context/app.context.tsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { PurchaseProvider } from './context/purchase.context.tsx'
 
-export const queryClient = new QueryClient({
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      retry: 0
     }
   }
 })
@@ -22,7 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AppProvider>
-          <App />
+          <PurchaseProvider>
+            <App />
+          </PurchaseProvider>
         </AppProvider>
         <ToastContainer autoClose={2000} />
         <ReactQueryDevtools initialIsOpen={false} />

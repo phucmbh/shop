@@ -18,9 +18,9 @@ const Product = ({ product }: Props) => {
 
         <div className="flex grow flex-col gap-3 p-2">
           <div className="line-clamp-2 break-all text-xs">{product.name}</div>
-          <div className="mt-auto flex gap-1 text-sm">
-            <div className="max-w-[50%] truncate text-gray-500 line-through">
-              <span className=" text-xs">₫</span>
+          <div className="mt-auto flex items-baseline gap-1 text-sm">
+            <div className="max-w-[50%] truncate align-bottom text-xs text-gray-400 line-through">
+              <span>₫</span>
               {formatCurrency(product.price_before_discount)}
             </div>
             <div className="text-orange max-w-[50%] truncate">

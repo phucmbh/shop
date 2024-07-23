@@ -1,9 +1,13 @@
 import { User } from '@/@types'
 
+export const LocalStorageEventTarget = new EventTarget()
+
 const LocalStorage = {
   clear: () => {
     localStorage.removeItem('access_token')
     localStorage.removeItem('profile')
+    const clearEvent = new Event('clearLocalStorage')
+    LocalStorageEventTarget.dispatchEvent(clearEvent)
   },
 
   setAccessToken: (access_token: string) => {

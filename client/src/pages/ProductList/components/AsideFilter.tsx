@@ -35,7 +35,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
     <aside className="text-sm">
       <Link
         to={PATH.HOME}
-        className={clsx('flex items-center gap-3 border border-b-gray-300 py-4 text-black', {
+        className={clsx('flex items-center gap-3   py-4 text-black', {
           'text-orange': !category
         })}
       >
@@ -43,7 +43,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
         <span className="text-base font-bold capitalize">Tất cả danh mục</span>
       </Link>
       {categoriesData && (
-        <ul className="mt-4">
+        <ul className="">
           {categoriesData.data.data.map((categoryItem) => {
             const isActive = categoryItem._id === category
             return (

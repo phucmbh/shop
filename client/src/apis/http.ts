@@ -57,8 +57,14 @@ class Http {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const data: any | undefined = error.response?.data
           const message = data.message || error.message
+
           console.log(message)
           toast.error(message)
+        }
+
+        if (error.response?.status === HttpStatusCode.Unauthorized) {
+          LocalStorage.clear()
+          window.location.reload()
         }
         return Promise.reject(error)
       }

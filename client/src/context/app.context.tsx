@@ -8,13 +8,15 @@ interface AppContextInterface {
   setIsAuthenticated: React.Dispatch<SetStateAction<boolean>>
   profile: User | null
   setProfile: React.Dispatch<SetStateAction<User | null>>
+  reset: () => void
 }
 
 const initialAppContext: AppContextInterface = {
   isAuthenticated: Boolean(LocalStorage.getAccessToken()),
   setIsAuthenticated: () => null,
   profile: LocalStorage.getProfile(),
-  setProfile: () => null
+  setProfile: () => null,
+  reset: () => null
 }
 
 export const AppContext = createContext<AppContextInterface>(initialAppContext)
@@ -22,13 +24,18 @@ export const AppContext = createContext<AppContextInterface>(initialAppContext)
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(initialAppContext.isAuthenticated)
   const [profile, setProfile] = useState<User | null>(initialAppContext.profile)
+  const reset = () => {
+    setIsAuthenticated(false)
+    setProfile(null)
+  }
   return (
     <AppContext.Provider
       value={{
         isAuthenticated,
         setIsAuthenticated,
         profile,
-        setProfile
+        setProfile,
+        reset
       }}
     >
       {children}

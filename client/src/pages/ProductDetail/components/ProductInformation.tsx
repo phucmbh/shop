@@ -1,14 +1,14 @@
 import { Product } from '@/@types'
 import { toast } from 'react-toastify'
-import { useMutation } from '@tanstack/react-query'
-import { QuantityContorl, Rating } from '@/components'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { QuantityController, Rating } from '@/components'
 import { formatCurrency, formatNumberToSocialStyle, percentDiscount } from '@/utils/util'
 import { FaCartPlus, FaShippingFast, IoShieldCheckmarkSharp } from '@/utils/icons'
 import { useState } from 'react'
 
 import { purchaseApi } from '@/apis'
-import { queryClient } from '@/main'
-import { PURCHASES_STATUS } from '@/constants'
+import { PATH, PURCHASES_STATUS } from '@/constants'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   product: Product
@@ -16,22 +16,39 @@ interface Props {
 
 const ProductInformation = ({ product }: Props) => {
   const [quantity, setQuantity] = useState(1)
+  const navigate = useNavigate()
+  const queryClient = useQueryClient()
 
   const handleQuantity = (value: number) => {
     setQuantity(value)
   }
 
   const addToCartMutation = useMutation({
-    mutationFn: purchaseApi.addToCart,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
-      toast.success(data.data.message)
-    }
+    mutationFn: purchaseApi.addToCart
   })
 
   const handleAddToCart = () => {
-    addToCartMutation.mutate({ product_id: product._id, buy_count: quantity })
+    addToCartMutation.mutate(
+      { product_id: product._id, buy_count: quantity },
+      {
+        onSuccess: (data) => {
+          queryClient.invalidateQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
+          toast.success(data.data.message)
+        }
+      }
+    )
   }
+
+  const handleBuyNow = async () => {
+    const res = await addToCartMutation.mutateAsync({ product_id: product._id, buy_count: quantity })
+    const purchase = res.data.data
+    navigate(PATH.CART, {
+      state: {
+        purchaseId: purchase._id
+      }
+    })
+  }
+
   return (
     <div className=" flex flex-col gap-5">
       <h1 className="line-clamp-2 text-xl font-medium uppercase">{product.name}</h1>
@@ -59,10 +76,10 @@ const ProductInformation = ({ product }: Props) => {
       <div className="flex items-center text-sm text-gray-500">
         <p className="capitalize">Số lượng</p>
 
-        <QuantityContorl
+        <QuantityController
           classNameWrapper="ml-7"
           value={quantity}
-          onType={handleQuantity}
+          onTypeValue={handleQuantity}
           onIncrease={handleQuantity}
           onDecrease={handleQuantity}
           max={product.quantity}
@@ -79,7 +96,7 @@ const ProductInformation = ({ product }: Props) => {
           <p>Thêm vào giỏ hàng</p>
         </button>
 
-        <button className=" bg-orange hover:bg-orange/90 h-12 min-w-28 rounded-sm text-white">
+        <button onClick={handleBuyNow} className=" bg-orange hover:bg-orange/90 h-12 min-w-28 rounded-sm text-white">
           <p>Mua ngay</p>
         </button>
       </div>

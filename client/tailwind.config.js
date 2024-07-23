@@ -19,9 +19,11 @@ export default {
     ({ addComponents, theme }) => {
       addComponents({
         '.container': {
-          maxWidth: theme('columns.6xl'),
+          maxWidth: theme('columns.7xl'),
           marginLeft: 'auto',
-          marginRight: 'auto'
+          marginRight: 'auto',
+          paddingLeft: '1rem',
+          paddingRight: '1rem'
         }
       })
     }

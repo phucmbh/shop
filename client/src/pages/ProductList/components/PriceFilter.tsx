@@ -1,6 +1,6 @@
 import { Button, InputNumber } from '@/components'
 import { PATH } from '@/constants'
-import { PriceSchema } from '@/utils/validate'
+import { PriceSchema, PriceSchemaType } from '@/utils/validate'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Controller, useForm } from 'react-hook-form'
 import { createSearchParams, useNavigate } from 'react-router-dom'
@@ -18,11 +18,7 @@ const PriceFilter = ({ queryConfig }: Props) => {
     formState: { errors },
     control,
     trigger
-  } = useForm({
-    defaultValues: {
-      price_min: '',
-      price_max: ''
-    },
+  } = useForm<PriceSchemaType>({
     resolver: yupResolver(PriceSchema)
   })
 
@@ -37,7 +33,7 @@ const PriceFilter = ({ queryConfig }: Props) => {
     })
   })
   return (
-    <form onSubmit={onSubmit} className="my-4 border border-b-gray-400">
+    <form onSubmit={onSubmit} className="my-4 ">
       <div>Khoảng giá</div>
       <div className="mt-2 flex items-center ">
         <Controller

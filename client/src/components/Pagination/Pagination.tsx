@@ -45,46 +45,50 @@ const Pagination = ({ queryConfig, pageSize }: Props) => {
     })
   }
   return (
-    <div className="mt-6 flex flex-wrap items-center justify-center gap-1">
-      {page === 1 ? (
-        <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none">
-          Prev
-        </span>
-      ) : (
-        <Link
-          to={{
-            pathname: PATH.HOME,
-            search: createSearchParams({
-              ...queryConfig,
-              page: (page - 1).toString()
-            }).toString()
-          }}
-          className={clsx(baseStyle, 'bg-white')}
-        >
-          Prev
-        </Link>
-      )}
+    <>
+      {pageSize !== 1 && (
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-1">
+          {page === 1 ? (
+            <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none">
+              Prev
+            </span>
+          ) : (
+            <Link
+              to={{
+                pathname: PATH.HOME,
+                search: createSearchParams({
+                  ...queryConfig,
+                  page: (page - 1).toString()
+                }).toString()
+              }}
+              className={clsx(baseStyle, 'bg-white')}
+            >
+              Prev
+            </Link>
+          )}
 
-      {renderPagination()}
-      {page === pageSize ? (
-        <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none ">
-          Next
-        </span>
-      ) : (
-        <Link
-          to={{
-            pathname: PATH.HOME,
-            search: createSearchParams({
-              ...queryConfig,
-              page: (page + 1).toString()
-            }).toString()
-          }}
-          className={clsx(baseStyle, 'bg-white')}
-        >
-          Next
-        </Link>
+          {renderPagination()}
+          {page === pageSize ? (
+            <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none ">
+              Next
+            </span>
+          ) : (
+            <Link
+              to={{
+                pathname: PATH.HOME,
+                search: createSearchParams({
+                  ...queryConfig,
+                  page: (page + 1).toString()
+                }).toString()
+              }}
+              className={clsx(baseStyle, 'bg-white')}
+            >
+              Next
+            </Link>
+          )}
+        </div>
       )}
-    </div>
+    </>
   )
 }
 export default Pagination
