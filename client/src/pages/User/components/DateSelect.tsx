@@ -37,8 +37,8 @@ const DateSelect = ({ value, onChange, errorMessage, classNameError = 'mt-1 min-
   }
 
   return (
-    <div className="mt-2 flex flex-wrap  ">
-      <div className="w-full pt-3 text-left capitalize md:w-1/5 md:text-right">Ngày sinh</div>
+    <div className="mt-2 flex flex-wrap md:flex-nowrap  ">
+      <div className="w-full pt-3 text-left capitalize md:w-1/5 md:min-w-[150px] md:text-right">Ngày sinh</div>
       <div className="w-full md:w-4/5 md:pl-5  ">
         <div className="flex justify-between">
           <select

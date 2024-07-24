@@ -4,7 +4,7 @@ import { Purchase, PurchaseListStatus } from '@/@types/purchase.type'
 
 const URL = 'purchases'
 
-export const purchaseApi = {
+export const ApiPurchase = {
   addToCart(body: { product_id: string; buy_count: number }) {
     return http.post<SuccessResponse<Purchase>>(`${URL}/add-to-cart`, body)
   },

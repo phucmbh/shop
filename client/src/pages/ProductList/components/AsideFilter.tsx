@@ -7,7 +7,7 @@ import { omit } from 'lodash'
 
 import { Button } from '@/components'
 import { PATH } from '@/constants'
-import { categoryApi } from '@/apis/category.api'
+import { ApiCategory } from '@/apis/category.api'
 import RatingFilter from './RatingFilter'
 import PriceFilter from './PriceFilter'
 import { ProductQueryConfig } from '@/@types'
@@ -29,7 +29,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
 
   const { data: categoriesData } = useQuery({
     queryKey: ['categories'],
-    queryFn: () => categoryApi.getCategories()
+    queryFn: () => ApiCategory.getCategories()
   })
   return (
     <aside className="text-sm">

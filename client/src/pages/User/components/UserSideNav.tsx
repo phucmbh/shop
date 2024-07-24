@@ -1,14 +1,14 @@
 import { PATH } from '@/constants'
 import { FaPen } from 'react-icons/fa'
-import { Link, NavLink, useLocation } from 'react-router-dom'
-import { userSideNav } from '../user.constant'
+import { Link, NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
 import { getUrlAvatar } from '@/utils/util'
+import { MdEventNote, MdManageAccounts } from 'react-icons/md'
+import { RiLockPasswordLine } from 'react-icons/ri'
 
 const UserSideNav = () => {
-  const location = useLocation()
   const { profile } = useContext(AppContext)
 
   return (
@@ -25,19 +25,37 @@ const UserSideNav = () => {
         </div>
       </div>
       <div className="mt-5">
-        {userSideNav.map((item, index) => (
-          <NavLink
-            key={index}
-            to={item.path}
-            className={({ isActive }) =>
-              clsx('hover:text-orange mb-2 flex items-center gap-3', isActive && 'text-orange')
-            }
-          >
-            <span>{item.icon}</span> <span>{item.text}</span>
+        {userTabs.map((item, index) => (
+          <NavLink key={index} to={item.path}>
+            {({ isActive }) => (
+              <div className="mb-3 flex items-center gap-2">
+                <span>{item.icon}</span>
+                <span className={clsx('hover:text-orange ', isActive && 'text-orange')}>{item.text}</span>
+              </div>
+            )}
           </NavLink>
         ))}
       </div>
     </div>
   )
 }
+
+const userTabs = [
+  {
+    path: PATH.PROFILE,
+    icon: <MdManageAccounts size={20} className="text-sky-700" />,
+    text: 'Tài khoản của tôi'
+  },
+  {
+    path: PATH.CHANGE_PASSWORD,
+    icon: <RiLockPasswordLine size={20} className="text-cyan-700" />,
+    text: 'Đổi mật khẩu'
+  },
+  {
+    path: PATH.PURCHASE,
+    icon: <MdEventNote size={20} className="text-teal-700" />,
+    text: 'Đơn mua'
+  }
+]
+
 export default UserSideNav

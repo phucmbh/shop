@@ -1,4 +1,4 @@
-import { purchaseApi } from '@/apis'
+import { ApiPurchase } from '@/apis'
 import { CartList, CartTitle, TotalCart } from './components'
 import { useQuery } from '@tanstack/react-query'
 import { PATH, PURCHASES_STATUS } from '@/constants'
@@ -15,7 +15,7 @@ const Cart = () => {
 
   const { data: purchasesData } = useQuery({
     queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }],
-    queryFn: () => purchaseApi.getPurchases({ status: PURCHASES_STATUS.IN_CART })
+    queryFn: () => ApiPurchase.getPurchases({ status: PURCHASES_STATUS.IN_CART })
   })
 
   console.log('card')

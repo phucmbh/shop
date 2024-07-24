@@ -1,5 +1,5 @@
 import { Product as ProductType } from '@/@types'
-import { productApi } from '@/apis'
+import { ApiProduct } from '@/apis'
 import { Product } from '@/components'
 import { THREE_MINUTES } from '@/constants'
 import { useQuery } from '@tanstack/react-query'
@@ -14,7 +14,7 @@ const RelatedProduct = ({ product }: Props) => {
   const { data: productsData } = useQuery({
     queryKey: ['products', queryConfig],
     queryFn: () => {
-      return productApi.getProducts(queryConfig)
+      return ApiProduct.getProducts(queryConfig)
     },
     staleTime: THREE_MINUTES
   })

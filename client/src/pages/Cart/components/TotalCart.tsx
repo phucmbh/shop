@@ -1,5 +1,5 @@
 import { Button } from '@/components'
-import { purchaseApi } from '@/apis'
+import { ApiPurchase } from '@/apis'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { PURCHASES_STATUS } from '@/constants'
@@ -14,7 +14,6 @@ interface Props {
 }
 
 const TotalCart = ({ purchases, setPurchases }: Props) => {
-
   const isAllChecked = purchases.length > 0 ? purchases.every((purchase) => purchase.checked) : false
   const queryClient = useQueryClient()
   const handleCheckeAll = () => {
@@ -44,7 +43,7 @@ const TotalCart = ({ purchases, setPurchases }: Props) => {
   )
 
   const deletePurchaseMutation = useMutation({
-    mutationFn: purchaseApi.deletePurchase,
+    mutationFn: ApiPurchase.deletePurchase,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
       toast.success(data.data.message)
@@ -52,7 +51,7 @@ const TotalCart = ({ purchases, setPurchases }: Props) => {
   })
 
   const buyProductsMutation = useMutation({
-    mutationFn: purchaseApi.buyProducts,
+    mutationFn: ApiPurchase.buyProducts,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
       toast.success(data.data.message)

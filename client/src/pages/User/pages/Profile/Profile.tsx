@@ -3,7 +3,7 @@ import { Button, Input, InputFile, InputNumber } from '@/components'
 import { userSchema, UserSchemaType } from '@/utils/validate'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { DateSelect } from '../../components'
 import { toast } from 'react-toastify'
@@ -104,28 +104,29 @@ const Profile = () => {
         <h1 className="text-lg capitalize">Hồ sơ của tôi</h1>
         <p className="mt-2">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
       </div>
-      <form onSubmit={onSubmit} className="mt-8 flex flex-col-reverse md:flex-row md:items-start">
-        <div className="mt-6 grow md:mt-0 md:pr-12">
-          <div className="flex flex-wrap">
-            <div className="w-full pt-3 text-left capitalize md:w-1/5 md:text-right">Email</div>
+      <form onSubmit={onSubmit} className="mt-4 flex flex-col-reverse lg:flex-row lg:items-start">
+        <div className="  grow md:mt-0 md:pr-12 lg:w-[600px]">
+          <div className="flex flex-wrap md:flex-nowrap ">
+            <div className="w-full pt-3 text-left capitalize md:w-1/5 md:min-w-[150px]  md:text-right">Email</div>
             <div className="w-full md:w-4/5 md:pl-5 ">
               <div className="pt-3 text-gray-700">{profile?.email}</div>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap  ">
-            <div className=" w-full pt-3 text-left capitalize md:w-1/5 md:text-right">Tên</div>
+          <div className="mt-6 flex flex-wrap md:flex-nowrap  ">
+            <div className=" w-full pt-3 text-left capitalize md:w-1/5 md:min-w-[150px] md:text-right">Tên</div>
             <div className="w-full  md:w-4/5  md:pl-5">
               <Input
                 name="name"
-                placeholder="Tên"
                 register={register}
                 errorMessage={errors.name?.message}
                 classNameInput="w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm"
               />
             </div>
           </div>
-          <div className="mt-2 flex flex-wrap  ">
-            <div className="w-full pt-3 text-left capitalize md:w-1/5 md:text-right">Số điện thoại</div>
+          <div className="mt-2 flex flex-wrap md:flex-nowrap  ">
+            <div className="w-full pt-3 text-left capitalize md:w-1/5 md:min-w-[150px] md:text-right">
+              Số điện thoại
+            </div>
             <div className="w-full md:w-4/5 md:pl-5 ">
               <Controller
                 control={control}
@@ -143,8 +144,8 @@ const Profile = () => {
               />
             </div>
           </div>
-          <div className="mt-2 flex flex-wrap  ">
-            <div className="w-full pt-3 text-left capitalize md:w-1/5 md:text-right">Địa chỉ</div>
+          <div className="mt-2 flex flex-wrap md:flex-nowrap  ">
+            <div className="w-full pt-3 text-left capitalize md:w-1/5 md:min-w-[150px] md:text-right">Địa chỉ</div>
             <div className="w-full md:w-4/5 md:pl-5  ">
               <Input
                 name="address"
@@ -169,13 +170,13 @@ const Profile = () => {
           />
 
           <div className="mt-6 flex">
-            <div className="md:w-1/5"></div>
+            <div className="md:w-1/5 md:min-w-[150px]"></div>
             <div className="md:w-4/5 md:pl-5 ">
               <Button className="bg-orange hover:bg-orange/90 rounded-sm px-4 py-1 text-white ">Lưu</Button>
             </div>
           </div>
         </div>
-        <div className="mt-6 flex items-center  justify-center md:w-72 md:border-l md:border-l-gray-200 ">
+        <div className="mt-6 flex items-center  justify-center  lg:border-l lg:border-l-gray-200 ">
           <div className="mx-5 flex flex-col items-center justify-center gap-4">
             <div className="size-24 overflow-hidden rounded-full">
               <img src={previewImage || getUrlAvatar(avatar)} className="size-full object-cover" />

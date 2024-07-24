@@ -5,7 +5,7 @@ import { AppContext } from '@/context/app.context'
 import { PATH, PURCHASES_STATUS } from '@/constants'
 
 import { useQuery } from '@tanstack/react-query'
-import { purchaseApi } from '@/apis'
+import { ApiPurchase } from '@/apis'
 import { formatCurrency, genarateSlugify } from '@/utils/util'
 import { Purchase } from '@/@types'
 import useProductSearch from '@/hook/useProductSearch'
@@ -25,7 +25,7 @@ const SearchHeader = ({ className }: Props) => {
 
   const { data: purchasesInCartData } = useQuery({
     queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }],
-    queryFn: () => purchaseApi.getPurchases({ status: PURCHASES_STATUS.IN_CART }),
+    queryFn: () => ApiPurchase.getPurchases({ status: PURCHASES_STATUS.IN_CART }),
     enabled: isAuthenticated
   })
 

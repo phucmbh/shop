@@ -1,4 +1,4 @@
-import { productApi } from '@/apis'
+import { ApiProduct } from '@/apis'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import { ProductDescription, ProductImage, ProductInformation, RelatedProduct } from './components'
@@ -10,7 +10,7 @@ const ProductDetail = () => {
 
   const { data: productDetailData } = useQuery({
     queryKey: ['products', productId],
-    queryFn: () => productApi.getProductDetail(productId)
+    queryFn: () => ApiProduct.getProductDetail(productId)
   })
 
   const product = productDetailData?.data.data

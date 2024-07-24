@@ -1,7 +1,7 @@
 import { Pagination, Product } from '@/components'
 import { AsideFilter, SortProductList } from './components'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { productApi } from '@/apis'
+import { ApiProduct } from '@/apis'
 import { ProductListConfig } from '@/@types'
 import { THREE_MINUTES } from '@/constants'
 import { useProductQueryConfig } from '@/hook'
@@ -12,7 +12,7 @@ const ProductList = () => {
   const { data: productsData } = useQuery({
     queryKey: ['products', productQueryConfig],
     queryFn: () => {
-      return productApi.getProducts(productQueryConfig as ProductListConfig)
+      return ApiProduct.getProducts(productQueryConfig as ProductListConfig)
     },
     placeholderData: keepPreviousData,
     staleTime: THREE_MINUTES

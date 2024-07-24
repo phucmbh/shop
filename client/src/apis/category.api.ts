@@ -3,7 +3,7 @@ import { SuccessResponse } from '@/@types'
 import { Category } from '@/@types/category.type'
 const URL = 'categories'
 
-export const categoryApi = {
+export const ApiCategory = {
   getCategories() {
     return http.get<SuccessResponse<Category[]>>(URL)
   }

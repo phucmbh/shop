@@ -10,9 +10,16 @@ export const userSchema = Yup.object({
   address: Yup.string().max(160, 'Độ dài tối đa là 160 kí tự'),
   phone: Yup.string().max(20, 'Độ dài tối đa là 20 kí tự'),
   avatar: Yup.string().max(1000, 'Độ dài tối đa là 1000 kí tự'),
-  password: Yup.string().min(5, 'Độ dài từ 5 - 160 kí tự').max(160, 'Độ dài từ 5 -160 kí tự'),
-  new_password: Yup.string().min(5, 'Độ dài từ 5 - 160 kí tự').max(160, 'Độ dài từ 5 -160 kí tự'),
+  password: Yup.string()
+    .required('Mật khẩu là bắt buộc')
+    .min(5, 'Độ dài từ 5 - 160 kí tự')
+    .max(160, 'Độ dài từ 5 -160 kí tự'),
+  new_password: Yup.string()
+    .required('Mặt khẩu mới là bắt buộc')
+    .min(5, 'Độ dài từ 5 - 160 kí tự')
+    .max(160, 'Độ dài từ 5 -160 kí tự'),
   confirm_password: Yup.string()
+    .required('Nhập lại mật khẩu là bắt buộc')
     .min(5, 'Độ dài từ 5 - 160 kí tự')
     .max(160, 'Độ dài từ 5 -160 kí tự')
     .oneOf([Yup.ref('new_password')], 'Nhập lại password không đúng')

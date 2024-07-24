@@ -2,7 +2,7 @@ import http from './http'
 import { Product, ProductList, ProductListConfig, SuccessResponse } from '@/@types'
 
 const URL = 'products'
-export const productApi = {
+export const ApiProduct = {
   getProducts(params: ProductListConfig) {
     return http.get<SuccessResponse<ProductList>>(URL, { params })
   },

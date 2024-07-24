@@ -6,7 +6,7 @@ import { formatCurrency, formatNumberToSocialStyle, percentDiscount } from '@/ut
 import { FaCartPlus, FaShippingFast, IoShieldCheckmarkSharp } from '@/utils/icons'
 import { useState } from 'react'
 
-import { purchaseApi } from '@/apis'
+import { ApiPurchase } from '@/apis'
 import { PATH, PURCHASES_STATUS } from '@/constants'
 import { useNavigate } from 'react-router-dom'
 
@@ -24,7 +24,7 @@ const ProductInformation = ({ product }: Props) => {
   }
 
   const addToCartMutation = useMutation({
-    mutationFn: purchaseApi.addToCart
+    mutationFn: ApiPurchase.addToCart
   })
 
   const handleAddToCart = () => {

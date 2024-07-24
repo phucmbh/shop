@@ -4,7 +4,7 @@ import { QuantityController } from '@/components'
 import { Link } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
-import { purchaseApi } from '@/apis'
+import { ApiPurchase } from '@/apis'
 import { useDebounce } from '@/hook'
 import { PURCHASES_STATUS } from '@/constants'
 import { toast } from 'react-toastify'
@@ -29,10 +29,10 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
   }
 
   const updatePurchaseMutation = useMutation({
-    mutationFn: purchaseApi.updatePurchases
+    mutationFn: ApiPurchase.updatePurchases
   })
   const deletePurchaseMutation = useMutation({
-    mutationFn: purchaseApi.deletePurchase,
+    mutationFn: ApiPurchase.deletePurchase,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
       toast.success(data.data.message)
