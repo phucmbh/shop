@@ -8,5 +8,6 @@ export enum PATH {
   REGISTER = '/register',
   LOGOUT = '/logout',
   PRODUCTS = '/products',
-  CART = '/cart'
+  CART = '/cart',
+  ALL = '*'
 }

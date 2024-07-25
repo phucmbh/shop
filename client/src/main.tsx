@@ -9,6 +9,7 @@ import { AppProvider } from './context/app.context.tsx'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { PurchaseProvider } from './context/purchase.context.tsx'
+import { ErrorBoundary } from './components/index.ts'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,7 +26,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <AppProvider>
           <PurchaseProvider>
-            <App />
+            <ErrorBoundary>
+              <App />
+            </ErrorBoundary>
           </PurchaseProvider>
         </AppProvider>
         <ToastContainer autoClose={2000} />

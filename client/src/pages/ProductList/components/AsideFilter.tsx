@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { MdArrowRight, CiFilter, FaList } from '@/utils/icons'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 import { Button } from '@/components'
 import { PATH } from '@/constants'

@@ -1,14 +1,20 @@
 import { Navigate, Outlet, useRoutes } from 'react-router-dom'
-
-import { CartLayout, MainLayout, RegisterLayout } from './layouts'
-import { Login, ProductList, Register } from './pages'
-import { useContext } from 'react'
+import { lazy, Suspense, useContext } from 'react'
 import { AppContext } from './context/app.context'
+
 import { PATH } from './constants'
-import { ProductDetail } from './pages/ProductDetail'
-import { Cart } from './pages/Cart'
+import { CartLayout, MainLayout, RegisterLayout } from './layouts'
 import { UserLayout } from './pages/User/layout/UserLayout'
-import { ChangePassword, HistoryPurchase, Profile } from './pages/User/pages'
+import ChangePassword from './pages/User/pages/ChangePassword'
+import HistoryPurchase from './pages/User/pages/HistoryPurchase'
+import Profile from './pages/User/pages/Profile'
+import ProductList from './pages/ProductList'
+
+const Login = lazy(() => import('./pages/Login'))
+const Cart = lazy(() => import('./pages/Cart'))
+const Register = lazy(() => import('./pages/Register'))
+const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -30,7 +36,9 @@ const useRouteElement = () => {
           path: PATH.CART,
           element: (
             <CartLayout>
-              <Cart />
+              <Suspense>
+                <Cart />
+              </Suspense>
             </CartLayout>
           )
         },
@@ -67,7 +75,9 @@ const useRouteElement = () => {
           path: PATH.LOGIN,
           element: (
             <RegisterLayout>
-              <Login />
+              <Suspense>
+                <Login />
+              </Suspense>
             </RegisterLayout>
           )
         },
@@ -75,7 +85,9 @@ const useRouteElement = () => {
           path: PATH.REGISTER,
           element: (
             <RegisterLayout>
-              <Register />
+              <Suspense>
+                <Register />
+              </Suspense>
             </RegisterLayout>
           )
         }
@@ -92,10 +104,19 @@ const useRouteElement = () => {
     },
     {
       path: `${PATH.PRODUCTS}/:id`,
-      index: true,
       element: (
         <MainLayout>
-          <ProductDetail />
+          <Suspense>
+            <ProductDetail />
+          </Suspense>
+        </MainLayout>
+      )
+    },
+    {
+      path: PATH.ALL,
+      element: (
+        <MainLayout>
+          <NotFound />
         </MainLayout>
       )
     }

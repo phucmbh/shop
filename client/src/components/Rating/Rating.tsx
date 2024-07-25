@@ -1,12 +1,18 @@
-import { IoMdStar } from 'react-icons/io'
+import { GoStarFill } from 'react-icons/go'
 
-type Props = {
+interface Props {
   rating: number
+  size?: number
   activeClassName?: string
   noneActiveClassName?: string
 }
 
-const Rating = ({ rating, activeClassName = 'text-yellow-400', noneActiveClassName = 'text-gray-300' }: Props) => {
+const Rating = ({
+  rating,
+  activeClassName = 'text-yellow-400',
+  noneActiveClassName = 'text-gray-300',
+  size = 12
+}: Props) => {
   function ratingToRatingPercentList(rating: number) {
     const ratingPercents = []
     for (let i = 1; i <= 5; i++) {
@@ -21,13 +27,13 @@ const Rating = ({ rating, activeClassName = 'text-yellow-400', noneActiveClassNa
   }
 
   return (
-    <div className="flex items-center text-gray-200 ">
+    <div className="flex items-center gap-[2px]  text-gray-200 ">
       {ratingToRatingPercentList(rating).map((percent, index) => (
         <div className="relative" key={index}>
           <div className="absolute top-0 size-full overflow-hidden" style={{ width: percent }}>
-            <IoMdStar className={activeClassName} />
+            <GoStarFill size={size} className={activeClassName} />
           </div>
-          <IoMdStar className={noneActiveClassName} />
+          <GoStarFill size={size} className={noneActiveClassName} />
         </div>
       ))}
     </div>
