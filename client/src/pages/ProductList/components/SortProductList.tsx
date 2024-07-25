@@ -4,7 +4,7 @@ import { createSearchParams, Link, useNavigate } from 'react-router-dom'
 import { ORDER, PATH, SORT_BY } from '@/constants'
 import { ProductListConfig, ProductQueryConfig } from '@/@types'
 import clsx from 'clsx'
-import { omit } from 'lodash'
+import omit from 'lodash/omit'
 
 type Props = {
   queryConfig: ProductQueryConfig
@@ -60,6 +60,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               ' bg-orange text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.CREATED_AT),
               ' bg-white  hover:bg-gray-100': !isSortByActive(SORT_BY.CREATED_AT)
             })}
+            aria-label="pagination"
             onClick={() => handleSort(SORT_BY.CREATED_AT)}
           >
             Mới nhất
@@ -70,6 +71,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               ' bg-[#fb5533] text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.SOLd),
               ' bg-white hover:bg-gray-100': !isSortByActive(SORT_BY.SOLd)
             })}
+            aria-label="pagination"
             onClick={() => handleSort(SORT_BY.SOLd)}
           >
             Bán chạy
@@ -80,6 +82,7 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
               'bg-orange text-white hover:bg-orange/80': isSortByActive(SORT_BY.PRICE),
               'bg-white text-black hover:bg-slate-100': !isSortByActive(SORT_BY.PRICE)
             })}
+            aria-labelledby="select-sort-by-price"
             value={order || ''}
             onChange={(e) => handlePriceOrder(e.target.value as ORDER)}
           >

@@ -1,1 +1,2 @@
-export { default as ProductList } from './ProductList'
+import ProductList from './ProductList'
+export default ProductList

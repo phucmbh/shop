@@ -54,7 +54,10 @@ const SearchHeader = ({ className }: Props) => {
                     placeholder="Free ship đơn từ không 0 Đ"
                     {...register('search')}
                   />
-                  <button className="flex-shirnk-0 bg-orange rounded-sm px-5 py-1 text-white">
+                  <button
+                    className="flex-shirnk-0 bg-orange rounded-sm px-5 py-1 text-white"
+                    aria-label="Search product"
+                  >
                     <IoIosSearch size={20} />
                   </button>
                 </div>

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import { PATH, PURCHASES_STATUS } from '@/constants'
 import { Fragment, useContext, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { keyBy } from 'lodash'
+import keyBy from 'lodash/keyBy'
 import { PurchaseContext } from '@/context/purchase.context'
 import { noproductImage } from '@/utils/images'
 

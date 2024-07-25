@@ -4,7 +4,7 @@ import { searchSchema, SearchSchemaType } from '@/utils/validate'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import { PATH, SORT_BY } from '@/constants'
-import { omit } from 'lodash'
+import  omit  from 'lodash/omit'
 
 const useProductSearch = () => {
   const navigate = useNavigate()

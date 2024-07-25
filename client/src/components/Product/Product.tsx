@@ -30,7 +30,7 @@ const Product = ({ product }: Props) => {
           </div>
           <div className="self-end">
             <div className="flex items-center gap-2 text-xs ">
-              <Rating rating={product.rating} />
+              <Rating rating={product.rating} size={10} />
 
               <div>
                 <span>{formatNumberToSocialStyle(product.sold)}</span>

@@ -1,1 +1,2 @@
-export { default as HistoryPurchase } from './HistoryPurchase'
+import HistoryPurchase from './HistoryPurchase'
+export default HistoryPurchase

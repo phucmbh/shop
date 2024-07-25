@@ -1,4 +1,4 @@
-import { AuthResponse, User } from '@/@types'
+import { AuthResponse } from '@/@types'
 import { PATH } from '@/constants'
 import LocalStorage from '@/utils/auth'
 import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios'
@@ -7,10 +7,8 @@ import { toast } from 'react-toastify'
 class Http {
   instance: AxiosInstance
   private accessToken: string
-  private profile: User
   constructor() {
     this.accessToken = LocalStorage.getAccessToken()
-    this.profile = LocalStorage.getProfile()
     this.instance = axios.create({
       baseURL: 'https://api-ecom.duthanhduoc.com/',
       timeout: 10000,
