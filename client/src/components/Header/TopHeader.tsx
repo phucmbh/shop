@@ -11,21 +11,25 @@ import {
 import { Popover } from '../Popover'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ApiAuth } from '@/apis'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { AppContext } from '@/context/app.context'
 
 import { Button } from '../Button'
 import { PATH, PURCHASES_STATUS } from '@/constants'
 import { noproductImage } from '@/utils/images'
 import { getUrlAvatar } from '@/utils/util'
+import { useTranslation } from 'react-i18next'
+import clsx from 'clsx'
+import { locales } from '@/i18n/locales'
 
 interface Props {
   className?: string
 }
 
 const TopHeader = ({ className }: Props) => {
+  const { i18n } = useTranslation()
+  const currentLanguage = locales[i18n.language as keyof typeof locales]
   const { isAuthenticated, setIsAuthenticated, setProfile, profile } = useContext(AppContext)
-  const [language, setLanguage] = useState('Tiếng Việt')
   const queryClient = useQueryClient()
   const logoutMutation = useMutation({
     mutationFn: ApiAuth.logout,
@@ -35,6 +39,10 @@ const TopHeader = ({ className }: Props) => {
       queryClient.removeQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
     }
   })
+
+  const handleChangeLanguage = (lng: 'vi' | 'en') => {
+    i18n.changeLanguage(lng)
+  }
 
   const handleLogout = () => {
     logoutMutation.mutate()
@@ -99,21 +107,27 @@ const TopHeader = ({ className }: Props) => {
               popoverParent={
                 <div className="flex cursor-pointer  items-center gap-1 px-2 hover:text-gray-300">
                   <RiGlobalLine size={18} />
-                  <span className="hidden xl:inline-block">{language}</span>
+                  <span className=" xl:inline-block">{currentLanguage}</span>
                   <MdKeyboardArrowDown size={20} />
                 </div>
               }
             >
               <div className="relative flex  w-[180px] flex-col  items-start gap-3 rounded-sm bg-white text-sm ">
                 <button
-                  onClick={() => setLanguage('Tiếng Việt')}
-                  className="hover:text-orange w-full px-2 py-3 text-start hover:bg-slate-50"
+                  onClick={() => handleChangeLanguage('vi')}
+                  className={clsx(
+                    'hover:text-orange w-full px-2 py-3 text-start hover:bg-slate-50',
+                    i18n.language === 'vi' && 'text-orange'
+                  )}
                 >
                   Tiếng việt
                 </button>
                 <button
-                  onClick={() => setLanguage('English')}
-                  className="hover:text-orange w-full px-2 py-3 text-start hover:bg-slate-50"
+                  onClick={() => handleChangeLanguage('en')}
+                  className={clsx(
+                    'hover:text-orange w-full px-2 py-3 text-start hover:bg-slate-50',
+                    i18n.language === 'en' && 'text-orange'
+                  )}
                 >
                   English
                 </button>

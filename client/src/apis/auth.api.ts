@@ -1,9 +1,9 @@
-import { AuthResponse } from '@/@types';
+import { AuthResponse } from '@/@types'
 import http from './http'
-import { PATH } from '@/constants'
+import { URL } from '@/constants'
 
 export const ApiAuth = {
-  register: (body: { email: string; password: string }) => http.post<AuthResponse>(PATH.REGISTER, body),
-  login: (body: { email: string; password: string }) => http.post<AuthResponse>(PATH.LOGIN, body),
-  logout: () => http.post(PATH.LOGOUT)
+  register: (body: { email: string; password: string }) => http.post<AuthResponse>(URL.REGISTER, body),
+  login: (body: { email: string; password: string }) => http.post<AuthResponse>(URL.LOGIN, body),
+  logout: () => http.post(URL.LOGOUT)
 }

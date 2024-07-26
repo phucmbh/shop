@@ -1,7 +1,7 @@
 import { Product } from '@/@types'
 import { toast } from 'react-toastify'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { QuantityController, Rating } from '@/components'
+import { InputQuantity, Rating } from '@/components'
 import { formatCurrency, formatNumberToSocialStyle, percentDiscount } from '@/utils/util'
 import { FaCartPlus, FaShippingFast, IoShieldCheckmarkSharp } from '@/utils/icons'
 import { useState } from 'react'
@@ -9,12 +9,14 @@ import { useState } from 'react'
 import { ApiPurchase } from '@/apis'
 import { PATH, PURCHASES_STATUS } from '@/constants'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   product: Product
 }
 
 const ProductInformation = ({ product }: Props) => {
+  const { t } = useTranslation(['product'])
   const [quantity, setQuantity] = useState(1)
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -61,7 +63,7 @@ const ProductInformation = ({ product }: Props) => {
         <div className="mx-4 h-4 w-px bg-gray-300"></div>
         <div>
           <span className="border-orange mr-1">{formatNumberToSocialStyle(product.sold)}</span>
-          <span className="text-gray-400">Đã bán</span>
+          <span className="text-gray-400">{t('sold')}</span>
         </div>
       </div>
       <div className="flex items-center  gap-4 bg-gray-50 p-5">
@@ -70,13 +72,13 @@ const ProductInformation = ({ product }: Props) => {
         </span>
         <span className="text-orange text-2xl ">{`₫ ${formatCurrency(product.price)}`}</span>
         <span className="bg-orange rounded-sm px-1 py-px text-xs font-semibold uppercase text-white">
-          {percentDiscount(product.price_before_discount, product.price)} GIẢM
+          {percentDiscount(product.price_before_discount, product.price)} {t('down')}
         </span>
       </div>
       <div className="flex items-center text-sm text-gray-500">
-        <p className="capitalize">Số lượng</p>
+        <p className="capitalize">{t('quantity')}</p>
 
-        <QuantityController
+        <InputQuantity
           classNameWrapper="ml-7"
           value={quantity}
           onTypeValue={handleQuantity}
@@ -85,7 +87,7 @@ const ProductInformation = ({ product }: Props) => {
           max={product.quantity}
         />
 
-        {product.quantity && <p className="ml-5">{`${product.quantity} sản phẩm có sẵn`}</p>}
+        {product.quantity && <p className="ml-5">{`${product.quantity} ${t('products available')}`}</p>}
       </div>
       <div className="flex gap-5">
         <button
@@ -93,20 +95,20 @@ const ProductInformation = ({ product }: Props) => {
           onClick={handleAddToCart}
         >
           <FaCartPlus size={20} />
-          <p>Thêm vào giỏ hàng</p>
+          <p>{t('add to card')}</p>
         </button>
 
         <button onClick={handleBuyNow} className=" bg-orange hover:bg-orange/90 h-12 min-w-28 rounded-sm text-white">
-          <p>Mua ngay</p>
+          <p>{t('buy now')}</p>
         </button>
       </div>
       <div className="my-4 h-px w-full bg-gray-100"></div>
       <div className="flex gap-8">
         <div className="flex items-center gap-2">
-          <IoShieldCheckmarkSharp className="text-orange" /> <p>Hàng chính hãng 100%</p>
+          <IoShieldCheckmarkSharp className="text-orange" /> <p>{t('genuine product')} 100%</p>
         </div>
         <div className="flex items-center gap-2 ">
-          <FaShippingFast className="text-orange" /> <p>Miễn phí vận chuyển</p>
+          <FaShippingFast className="text-orange" /> <p>{t('free shipping')}</p>
         </div>
       </div>
     </div>

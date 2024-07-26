@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { formatCurrency } from '@/utils/util'
-import { QuantityController } from '@/components'
+import { InputQuantity } from '@/components'
 import { Link } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { produce } from 'immer'
@@ -117,7 +117,7 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
             </div>
           </div>
           <div className="col-span-1">
-            <QuantityController
+            <InputQuantity
               max={purchase.product.quantity}
               value={buyCount || purchase.buy_count}
               classNameWrapper="flex items-center"

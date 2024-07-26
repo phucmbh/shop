@@ -8,7 +8,6 @@ function App() {
   const { reset } = useContext(AppContext)
   useEffect(() => {
     LocalStorageEventTarget.addEventListener('clearLocalStorage', reset)
-
     return () => LocalStorageEventTarget.removeEventListener('clearLocalStorage', reset)
   }, [reset])
   return <>{routeElements}</>

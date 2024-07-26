@@ -1,6 +1,8 @@
 export { default as Input } from './Input'
 export { default as InputNumber } from './InputNumber'
 export { default as InputFile } from './InputFile'
+export { default as InputQuantity } from './InputQuantity'
 export * from './InputNumber'
 export * from './Input'
 export * from './InputFile'
+export * from './InputQuantity'

@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { PurchaseProvider } from './context/purchase.context.tsx'
 import { ErrorBoundary } from './components/index.ts'
+import './i18n/i18n.ts'
 
 const queryClient = new QueryClient({
   defaultOptions: {

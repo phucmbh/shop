@@ -60,7 +60,7 @@ const Register = () => {
   return (
     <Banner>
       <form className="rounded bg-white p-[30px] shadow-sm" onSubmit={onSubmit} noValidate>
-        <div className="text-2xl">Đăng kí</div>
+        <div className="mb-5 text-2xl">Đăng kí</div>
 
         <Input name="email" register={register} type="email" errorMessage={errors.email?.message} />
         <Input name="password" register={register} type="password" errorMessage={errors.password?.message} />

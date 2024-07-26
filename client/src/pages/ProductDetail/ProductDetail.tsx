@@ -1,9 +1,12 @@
+import { lazy } from 'react'
 import { ApiProduct } from '@/apis'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
-import { ProductDescription, ProductImage, ProductInformation, RelatedProduct } from './components'
+import { ProductDescription, ProductImage, ProductInformation } from './components'
 import { getIdFromSlugify } from '@/utils/util'
+import { RenderWhenViewPortEntry } from '@/components'
 
+const RelatedProduct = lazy(() => import('./components/RelatedProduct'))
 const ProductDetail = () => {
   const { id } = useParams()
 
@@ -37,7 +40,9 @@ const ProductDetail = () => {
           </div>
 
           <div className="container mt-8 bg-white p-4 shadow">
-            <RelatedProduct product={product} />
+            <RenderWhenViewPortEntry threshold={0.2} style={{ minHeight: '500px' }}>
+              <RelatedProduct product={product} />
+            </RenderWhenViewPortEntry>
           </div>
         </div>
       )}

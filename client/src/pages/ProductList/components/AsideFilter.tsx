@@ -11,6 +11,7 @@ import { ApiCategory } from '@/apis/category.api'
 import RatingFilter from './RatingFilter'
 import PriceFilter from './PriceFilter'
 import { ProductQueryConfig } from '@/@types'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   queryConfig: ProductQueryConfig
@@ -18,6 +19,7 @@ interface Props {
 
 const AsideFilter = ({ queryConfig }: Props) => {
   const navigate = useNavigate()
+  const { t } = useTranslation(['home'])
   const { category } = queryConfig
 
   const handleRemoveAllFilters = () => {
@@ -40,7 +42,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
         })}
       >
         <FaList size={20} />
-        <span className="text-base font-bold capitalize">Tất cả danh mục</span>
+        <span className="text-base font-bold capitalize">{t('all categories')}</span>
       </Link>
       {categoriesData && (
         <ul className="">
@@ -70,7 +72,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
       )}
       <div className="my-4 flex items-center  gap-3 text-black">
         <CiFilter size={20} />
-        <span className="text-base font-bold uppercase">Bộ lọc tìm kiếm</span>
+        <span className="text-base font-bold uppercase">{t('search filter')}</span>
       </div>
 
       <PriceFilter queryConfig={queryConfig} />
@@ -81,7 +83,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
         onClick={handleRemoveAllFilters}
         className="bg-orange hover:bg-orange/80 w-full p-2 uppercase text-white "
       >
-        Xóa tất cả
+        {t('clear all')}
       </Button>
     </aside>
   )

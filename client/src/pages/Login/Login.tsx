@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <Banner>
       <form className="rounded bg-white p-10 shadow-sm" onSubmit={onSubmit} noValidate>
-        <div className="text-2xl">Đăng nhập</div>
+        <div className="mb-5 text-2xl ">Đăng nhập</div>
 
         <Input type="email" name="email" register={register} errorMessage={errors.email?.message} placeholder="Email" />
 

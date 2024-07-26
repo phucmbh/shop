@@ -1,10 +1,10 @@
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
-
-import { createSearchParams, Link, useNavigate } from 'react-router-dom'
+import { createSearchParams, useNavigate } from 'react-router-dom'
 import { ORDER, PATH, SORT_BY } from '@/constants'
 import { ProductListConfig, ProductQueryConfig } from '@/@types'
 import clsx from 'clsx'
 import omit from 'lodash/omit'
+import PaginationArrow from './PaginationArrow'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   queryConfig: ProductQueryConfig
@@ -13,6 +13,7 @@ type Props = {
 
 const SortProductList = ({ queryConfig, pageSize }: Props) => {
   const navigate = useNavigate()
+  const { t } = useTranslation('home')
   const page = Number(queryConfig.page)
   const { sort_by = SORT_BY.CREATED_AT, order } = queryConfig
 
@@ -42,39 +43,39 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
   return (
     <div className="flex flex-wrap items-center  gap-2 bg-gray-300/40 px-3 py-4">
       <div className="flex basis-full flex-wrap items-center justify-between gap-2">
-        <section className="flex flex-wrap items-center gap-2">
-          <span>Sắp xếp theo</span>
+        <section className="flex flex-wrap items-center gap-2 capitalize">
+          <span>{t('sort by')}</span>
 
           <button
-            className={clsx('px-3 py-1 shadow-sm ', {
+            className={clsx('px-3 py-1 capitalize shadow-sm', {
               ' bg-orange text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.VIEW),
               'bg-white hover:bg-gray-100': !isSortByActive(SORT_BY.VIEW)
             })}
             onClick={() => handleSort(SORT_BY.VIEW)}
           >
-            Phổ biến
+            {t('popular')}
           </button>
 
           <button
-            className={clsx(' px-3 py-1 shadow-sm ', {
+            className={clsx(' px-3 py-1 capitalize shadow-sm ', {
               ' bg-orange text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.CREATED_AT),
               ' bg-white  hover:bg-gray-100': !isSortByActive(SORT_BY.CREATED_AT)
             })}
             aria-label="pagination"
             onClick={() => handleSort(SORT_BY.CREATED_AT)}
           >
-            Mới nhất
+            {t('newest')}
           </button>
 
           <button
-            className={clsx(']  px-3 py-1 shadow-sm ', {
+            className={clsx(']  px-3 py-1 capitalize shadow-sm ', {
               ' bg-[#fb5533] text-white hover:bg-orange/80  hover:text-white': isSortByActive(SORT_BY.SOLd),
               ' bg-white hover:bg-gray-100': !isSortByActive(SORT_BY.SOLd)
             })}
             aria-label="pagination"
             onClick={() => handleSort(SORT_BY.SOLd)}
           >
-            Bán chạy
+            {t('bestselling')}
           </button>
 
           <select
@@ -86,54 +87,18 @@ const SortProductList = ({ queryConfig, pageSize }: Props) => {
             value={order || ''}
             onChange={(e) => handlePriceOrder(e.target.value as ORDER)}
           >
-            <option className="bg-white text-black" value="" disabled>
-              Giá
+            <option className="bg-white capitalize text-black" value="" disabled>
+              {t('price')}
             </option>
             <option className="bg-white text-black" value={ORDER.ASC}>
-              Giá: Thấp đến cao
+              {t('price: high to low')}
             </option>
             <option className="bg-white text-black" value={ORDER.DESC}>
-              Giá: Cao đến thấp
+              {t('price: low to high')}
             </option>
           </select>
         </section>
-        <section className="flex basis-[100px] items-center justify-center gap-1">
-          <div className="grow">
-            <span className="text-orange">{page}</span>
-            <span>{`/${pageSize}`}</span>
-          </div>
-          {page === 1 ? (
-            <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none">
-              <MdKeyboardArrowLeft />
-            </span>
-          ) : (
-            <Link
-              to={{
-                pathname: PATH.HOME,
-                search: createSearchParams({ ...queryConfig, page: (page - 1).toString() }).toString()
-              }}
-              className="rounded-sm bg-white px-2 py-1 shadow hover:bg-gray-100"
-            >
-              <MdKeyboardArrowLeft />
-            </Link>
-          )}
-
-          {page === pageSize ? (
-            <span className="cursor-not-allowed rounded border border-slate-200 bg-slate-50  px-2 py-1 text-slate-400 shadow-none ">
-              <MdKeyboardArrowRight />
-            </span>
-          ) : (
-            <Link
-              to={{
-                pathname: PATH.HOME,
-                search: createSearchParams({ ...queryConfig, page: (page + 1).toString() }).toString()
-              }}
-              className="rounded-sm bg-white px-2 py-1 shadow hover:bg-gray-100"
-            >
-              <MdKeyboardArrowRight />
-            </Link>
-          )}
-        </section>
+        <PaginationArrow page={page} pageSize={pageSize} queryConfig={queryConfig} />
       </div>
     </div>
   )

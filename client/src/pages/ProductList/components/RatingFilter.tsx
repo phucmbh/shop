@@ -1,5 +1,6 @@
 import { ProductQueryConfig } from '@/@types'
 import { PATH } from '@/constants'
+import { useTranslation } from 'react-i18next'
 import { GoStar, GoStarFill } from 'react-icons/go'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 
@@ -7,6 +8,7 @@ interface Props {
   queryConfig: ProductQueryConfig
 }
 const RatingFilter = ({ queryConfig }: Props) => {
+  const {t} = useTranslation('home')
   const navigate = useNavigate()
 
   const handleFilterStar = (rating: number) => {
@@ -18,7 +20,7 @@ const RatingFilter = ({ queryConfig }: Props) => {
 
   return (
     <div className="my-4  ">
-      <span className="text-base  ">Đánh giá</span>
+      <span className="text-base  ">{t('review')}</span>
       <ul className="my-3">
         {Array(5)
           .fill(0)
@@ -30,14 +32,14 @@ const RatingFilter = ({ queryConfig }: Props) => {
                   .map((_, indexStar) => {
                     if (indexStar < 5 - index)
                       return (
-                        <div className="relative">
+                        <div key={indexStar} className="relative">
                           <GoStarFill fill="#ffca11" size={15} />
                           <GoStar fill="#ffad27" size={15} className="absolute top-0" />
                         </div>
                       )
-                    return <GoStar size={15} fill="#ffca11" />
+                    return <GoStar key={indexStar} size={15} fill="#ffca11" />
                   })}
-                {index !== 0 && <span className="ml-1 text-black">trở lên</span>}
+                {index !== 0 && <span className="ml-1 text-black">{t('or more')}</span>}
               </div>
             </li>
           ))}
