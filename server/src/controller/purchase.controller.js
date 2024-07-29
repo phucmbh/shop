@@ -234,7 +234,7 @@ var that = (module.exports = {
   },
 
   deletePurchases: async (req, res) => {
-    const purchase_ids = req.body;
+    const purchase_ids = req.body;k
     const user_id = req.jwtDecoded.id;
     const deletedData = await Purchase.delet({
       user: user_id,

@@ -1,4 +1,14 @@
 {
+  "Top Header": {
+    "Notification": "Notification",
+    "Support": "Support",
+    "Seller Channel": "Seller Channel",
+    "Become a Shopee Seller": "Become a Shopee Seller", 
+    "Download App": "Download App",
+    "Connect": "Connect",
+    "Sign up": "Sign up",
+    "Log in": "Log in"
+  },
   "all categories": "All categories",
   "search filter": "Serach filter",
   "price range": "Price range",
@@ -11,7 +21,7 @@
   "sort by": "sort by",
   "popular": "popular",
   "newest": "newest",
-  "bestselling": "bestselling",
+  "bestselling": "Best selling",
   "price": "price",
   "price: low to high": "Price: Low to High",
   "price: high to low": "Price: High to Low"

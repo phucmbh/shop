@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react'
 
-interface Props<T> {
-  value: T
-  milliseconds: number
-}
-
-const useDebounce = <T extends object | number | string>({ value, milliseconds }: Props<T>) => {
+const useDebounce = <T extends object | number | string>(value: T, milliseconds: number) => {
   const [debounceValue, setDebounceValue] = useState(value)
   useEffect(() => {
     const id = setTimeout(() => {

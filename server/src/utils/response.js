@@ -7,8 +7,6 @@ const wrapAsync = (func) => {
 };
 
 class ErrorHandler extends Error {
-  status;
-  error;
   constructor(status, error) {
     super();
     this.status = status;

@@ -21,21 +21,20 @@ import { getUrlAvatar } from '@/utils/util'
 import { useTranslation } from 'react-i18next'
 import clsx from 'clsx'
 import { locales } from '@/i18n/locales'
+import LocalStorage from '@/utils/auth'
 
 interface Props {
   className?: string
 }
 
 const TopHeader = ({ className }: Props) => {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation('home')
   const currentLanguage = locales[i18n.language as keyof typeof locales]
   const { isAuthenticated, setIsAuthenticated, setProfile, profile } = useContext(AppContext)
   const queryClient = useQueryClient()
   const logoutMutation = useMutation({
     mutationFn: ApiAuth.logout,
     onSuccess: () => {
-      setIsAuthenticated(false)
-      setProfile(null)
       queryClient.removeQueries({ queryKey: ['purchases', { status: PURCHASES_STATUS.IN_CART }] })
     }
   })
@@ -46,6 +45,9 @@ const TopHeader = ({ className }: Props) => {
 
   const handleLogout = () => {
     logoutMutation.mutate()
+    setIsAuthenticated(false)
+    setProfile(null)
+    LocalStorage.clear()
   }
   return (
     <div className={className}>
@@ -54,16 +56,16 @@ const TopHeader = ({ className }: Props) => {
           <div>
             <div className="hidden xl:flex">
               <Link to="/" className=" border-r-2 border-gray-100/40 pr-2 hover:text-gray-300">
-                <span>Kênh người bán</span>
+                <span>{t('Top Header.Seller Channel')}</span>
               </Link>
               <Link to="/" className="border-r-2 border-gray-100/40 px-2  hover:text-gray-300">
-                <span>Trở thành người bán hàng shopee</span>
+                <span>{t('Top Header.Become a Shopee Seller')}</span>
               </Link>
               <Link to="/" className=" border-r-2 border-gray-100/40 px-2  hover:text-gray-300">
-                <span>Tải ứng dụng</span>
+                <span>{t('Top Header.Download App')}</span>
               </Link>
               <span className="flex items-center gap-2 pl-2">
-                <h3>Kết nối</h3>
+                <h3>{t('Top Header.Connect')}</h3>
 
                 <Link to="https://facebook.com/ShopeeVN">
                   <FaFacebook size={16} />
@@ -79,7 +81,7 @@ const TopHeader = ({ className }: Props) => {
               popoverParent={
                 <div className="flex cursor-pointer items-center gap-1  hover:text-gray-300">
                   <IoMdNotificationsOutline size={20} />
-                  <span className="hidden xl:inline-block">Thông báo</span>
+                  <span className="hidden xl:inline-block">{t('Top Header.Notification')}</span>
                 </div>
               }
             >
@@ -90,10 +92,10 @@ const TopHeader = ({ className }: Props) => {
                 </div>
                 <div className="grid grid-cols-2 text-center">
                   <Link to={PATH.LOGIN} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
-                    Đăng nhập
+                    {t('Top Header.Sign up')}
                   </Link>
                   <Link to={PATH.REGISTER} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
-                    Đăng ký
+                    {t('Top Header.Log in')}
                   </Link>
                 </div>
               </div>
@@ -101,7 +103,7 @@ const TopHeader = ({ className }: Props) => {
 
             <Link to="/" className="flex items-center  gap-1  px-2 hover:text-gray-300">
               <MdHelpOutline size={18} />
-              <span className="hidden xl:inline-block">Hỗ trợ</span>
+              <span className="hidden xl:inline-block">{t('Top Header.Support')}</span>
             </Link>
             <Popover
               popoverParent={
@@ -137,10 +139,10 @@ const TopHeader = ({ className }: Props) => {
             {!isAuthenticated && (
               <>
                 <Link to={PATH.REGISTER} className="border-r-2 border-gray-100/40 px-4  hover:text-gray-300">
-                  Đăng kí
+                  {t('Top Header.Sign up')}
                 </Link>
                 <Link to={PATH.LOGIN} className="px-4 hover:text-gray-300">
-                  Đăng nhập
+                  {t('Top Header.Log in')}
                 </Link>
               </>
             )}

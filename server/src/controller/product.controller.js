@@ -1,5 +1,5 @@
 const { Success, ErrorHandler } = require('../utils/response');
-const  Product  = require('../model/Product');
+const Product = require('../model/Product');
 const { STATUS, ORDER, SORT_BY } = require('../constants');
 const mongoose = require('mongoose');
 const { isAdmin } = require('../utils/validate');
@@ -139,7 +139,7 @@ var that = (module.exports = {
         .lean(),
       Product.find(condition).countDocuments().lean(),
     ]);
-    products = products.map((product) => handleImageProduct(product));
+    products = products.map((product) => this.handleImageProduct(product));
     const page_size = Math.ceil(totalProducts / limit) || 1;
     cons = {
       message: 'Lấy các sản phẩm thành công',

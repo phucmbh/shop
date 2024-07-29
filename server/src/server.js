@@ -15,9 +15,8 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-
 initRouters(server);
-
+server.get('/', (res, req) => res.status(200).json({ ok: 'hmm' }));
 
 server.use(function (err, req, res, next) {
   responseError(res, err);

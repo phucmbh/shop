@@ -17,7 +17,7 @@ interface Props {
 }
 
 const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
-  const [buyCount, setBuyCount] = useState<number | null>(null)
+  const [quantity, setQuantity] = useState<number>(purchase.buy_count)
   const queryClient = useQueryClient()
 
   const handleCheck = () => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,14 +39,14 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
     }
   })
 
-  const buyCountDebounce = useDebounce({ value: Number(buyCount), milliseconds: 1500 })
+  const quantityDebounce = useDebounce(Number(quantity), 1500)
 
   useEffect(() => {
-    if (buyCountDebounce) {
+    if (quantityDebounce !== purchase.buy_count) {
       updatePurchaseMutation.mutate(
         {
           product_id: purchase.product._id,
-          buy_count: buyCountDebounce
+          buy_count: quantityDebounce
         },
         {
           onSuccess: () => {
@@ -55,22 +55,10 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
         }
       )
     }
-  }, [buyCountDebounce])
+  }, [quantityDebounce])
 
-  const handleQuantity = (value: number, enable: boolean) => {
-    if (enable) {
-      setBuyCount(value)
-    }
-  }
-
-  const handleTypeQuantity = () => (value: number) => {
-    setPurchases(
-      produce((draft) => {
-        draft[index].buy_count = value
-      })
-    )
-
-    setBuyCount(value)
+  const handleChangeQuantity = (value: number) => {
+    setQuantity(value)
   }
 
   const handleDeletePurchase = () => {
@@ -119,19 +107,17 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
           <div className="col-span-1">
             <InputQuantity
               max={purchase.product.quantity}
-              value={buyCount || purchase.buy_count}
+              value={quantity || purchase.buy_count}
               classNameWrapper="flex items-center"
-              onIncrease={(value) =>
-                handleQuantity(value, value <= purchase.product.quantity && value !== purchase.buy_count)
-              }
-              onDecrease={(value) => handleQuantity(value, value >= 1 && value !== purchase.buy_count)}
-              onTypeValue={handleTypeQuantity()}
+              onIncrease={(value) => handleChangeQuantity(value)}
+              onDecrease={(value) => handleChangeQuantity(value)}
+              onTypeValue={handleChangeQuantity}
               disabled={purchase.disable}
             />
           </div>
           <div className="col-span-1">
             <span className="text-orange">
-              ₫{formatCurrency(purchase.product.price * (buyCount || purchase.buy_count))}
+              ₫{formatCurrency(purchase.product.price * (quantity || purchase.buy_count))}
             </span>
           </div>
           <div className="col-span-1">

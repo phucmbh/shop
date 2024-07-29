@@ -2,7 +2,7 @@ import { AuthResponse, ErrorResponse, RefreshTokenReponse } from '@/@types'
 import { PATH, URL } from '@/constants'
 import LocalStorage from '@/utils/auth'
 import { isAxiosExpiredTokenError, isAxiosUnauthorizedError } from '@/utils/util'
-import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios'
+import axios, { AxiosError, AxiosInstance, HttpStatusCode, InternalAxiosRequestConfig } from 'axios'
 import { toast } from 'react-toastify'
 
 class Http {
@@ -15,12 +15,12 @@ class Http {
     this.refreshToken = LocalStorage.getRefreshToken()
     this.refreshTokenRequest = null
     this.instance = axios.create({
-      baseURL: 'https://api-ecom.duthanhduoc.com/',
+      baseURL: import.meta.env.VITE_SERVER_URL,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
-        'expire-access-token': 60 * 60 * 24, // 1 ngày`
-        'expire-refresh-token': 60 * 60 * 24 * 10 // 10 ngày
+        'expire-access-token': 60 * 60 * 24, // 1 day
+        'expire-refresh-token': 60 * 60 * 24 * 10 // 10 day
       }
     })
 
@@ -33,7 +33,7 @@ class Http {
 
         return config
       },
-      function (error: AxiosError) {
+      (error) => {
         return Promise.reject(error)
       }
     )
@@ -51,7 +51,7 @@ class Http {
           LocalStorage.setProfile(data.data.user)
         }
 
-        if (url === PATH.LOGOUT) {
+        if (url === URL.LOGOUT) {
           this.accessToken = ''
           this.refreshToken = ''
           LocalStorage.clear()
@@ -59,7 +59,7 @@ class Http {
 
         return response
       },
-      (error) => {
+      (error: AxiosError) => {
         // Chỉ toast lỗi không phải 422 và 401
         if (
           ![HttpStatusCode.UnprocessableEntity, HttpStatusCode.Unauthorized].includes(
@@ -72,17 +72,12 @@ class Http {
           toast.error(message)
         }
 
-        // Lỗi Unauthorized (401) có rất nhiều trường hợp
-        // - Token không đúng
-        // - Không truyền token
-        // - Token hết hạn*
-
         // Nếu là lỗi 401
-        if (isAxiosUnauthorizedError<ErrorResponse<{ name: string; message: string }>>(error)) {
-          const config = error.response?.config || {}
+        if (isAxiosUnauthorizedError<ErrorResponse<{ name: string; message: string }>>(error) && error.response) {
+          console.log(error.response?.config)
+          const config = error.response.config
           const { url } = config
-          // Trường hợp Token hết hạn và request đó không phải là của request refresh token
-          // thì chúng ta mới tiến hành gọi refresh token
+
           if (isAxiosExpiredTokenError(error) && url !== URL.REFRESH_TOKEN) {
             // Hạn chế gọi 2 lần handleRefreshToken
             console.log(this.refreshTokenRequest)
@@ -95,15 +90,10 @@ class Http {
                   }, 10000)
                 })
             return this.refreshTokenRequest.then((access_token) => {
-              // Nghĩa là chúng ta tiếp tục gọi lại request cũ vừa bị lỗi
+              // Tiếp tục gọi lại request cũ vừa bị lỗi
               return this.instance({ ...config, headers: { ...config.headers, authorization: access_token } })
             })
           }
-
-          // Còn những trường hợp như token không đúng
-          // không truyền token,
-          // token hết hạn nhưng gọi refresh token bị fail
-          // thì tiến hành xóa local storage và toast message
 
           LocalStorage.clear()
           this.accessToken = ''

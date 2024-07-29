@@ -10,6 +10,7 @@ const initRouters = (app) => {
   app.use('/products', productRouter);
   app.use('/purchases', purchaseRouter);
   app.use('/users', userRouter);
+  
 };
 
 module.exports = initRouters;
