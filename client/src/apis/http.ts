@@ -2,7 +2,7 @@ import { AuthResponse, ErrorResponse, RefreshTokenReponse } from '@/@types'
 import { PATH, URL } from '@/constants'
 import LocalStorage from '@/utils/auth'
 import { isAxiosExpiredTokenError, isAxiosUnauthorizedError } from '@/utils/util'
-import axios, { AxiosError, AxiosInstance, HttpStatusCode, InternalAxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosInstance, HttpStatusCode } from 'axios'
 import { toast } from 'react-toastify'
 
 class Http {

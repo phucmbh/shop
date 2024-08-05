@@ -45,7 +45,7 @@ const DateSelect = ({ value, onChange, errorMessage, classNameError = 'mt-1 min-
             name="date"
             onChange={handleChange}
             value={value?.getDate() || date.date}
-            className="hover:border-orange h-10 w-[32%] cursor-pointer rounded-sm border border-black/10"
+            className="h-10 w-[32%] cursor-pointer rounded-sm border border-black/10 hover:border-orange"
           >
             <option disabled>Ngày</option>
             {range(1, 32).map((item) => (
@@ -58,7 +58,7 @@ const DateSelect = ({ value, onChange, errorMessage, classNameError = 'mt-1 min-
             name="month"
             value={value?.getMonth() || date.month}
             onChange={handleChange}
-            className="hover:border-orange h-10 w-[32%] cursor-pointer rounded-sm border border-black/10"
+            className="h-10 w-[32%] cursor-pointer rounded-sm border border-black/10 hover:border-orange"
           >
             <option disabled>Tháng</option>
             {range(0, 12).map((item) => (
@@ -71,7 +71,7 @@ const DateSelect = ({ value, onChange, errorMessage, classNameError = 'mt-1 min-
             name="year"
             value={value?.getFullYear() || date.year}
             onChange={handleChange}
-            className="hover:border-orange h-10 w-[32%] cursor-pointer rounded-sm border border-black/10"
+            className="h-10 w-[32%] cursor-pointer rounded-sm border border-black/10 hover:border-orange"
           >
             <option disabled>Năm</option>
             {range(1990, 2025).map((item) => (

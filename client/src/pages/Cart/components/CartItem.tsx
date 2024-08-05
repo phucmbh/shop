@@ -75,7 +75,7 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
           <div className="flex shrink-0 items-center justify-center pr-3">
             <input
               type="checkbox"
-              className="accent-orange size-5"
+              className="size-5 accent-orange"
               checked={purchase.checked}
               onChange={handleCheck()}
             />
@@ -121,7 +121,7 @@ const CartItem = memo(({ purchase, setPurchases, index }: Props) => {
             </span>
           </div>
           <div className="col-span-1">
-            <button className="hover:text-orange bg-none text-black transition-colors" onClick={handleDeletePurchase}>
+            <button className="bg-none text-black transition-colors hover:text-orange" onClick={handleDeletePurchase}>
               Xóa
             </button>
           </div>

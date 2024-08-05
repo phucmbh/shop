@@ -55,7 +55,7 @@ const SearchHeader = ({ className }: Props) => {
                     {...register('search')}
                   />
                   <button
-                    className="flex-shirnk-0 bg-orange rounded-sm px-5 py-1 text-white"
+                    className="flex-shirnk-0 rounded-sm bg-orange px-5 py-1 text-white"
                     aria-label="Search product"
                   >
                     <IoIosSearch size={20} />
@@ -83,7 +83,7 @@ const SearchHeader = ({ className }: Props) => {
                 <div className="relative w-10 cursor-pointer">
                   <FiShoppingCart size={28} />
                   {purchasesInCart.length > 0 ? (
-                    <span className="border-orange text-orange absolute right-0 top-[-5px] h-5 w-6 rounded-[2.75rem]  border-2 bg-white text-center ">
+                    <span className="absolute right-0 top-[-5px] h-5 w-6 rounded-[2.75rem] border-2 border-orange  bg-white text-center text-orange ">
                       {purchasesInCart.length}
                     </span>
                   ) : (
@@ -111,14 +111,14 @@ const SearchHeader = ({ className }: Props) => {
                             <div className="truncate text-sm">{purchase.product.name}</div>
                           </div>
                           <div className="">
-                            <span className="text-orange text-sm">{`₫${formatCurrency(purchase.product.price)}`}</span>
+                            <span className="text-sm text-orange">{`₫${formatCurrency(purchase.product.price)}`}</span>
                           </div>
                         </div>
                       ))}
 
                       <div className="flex items-center justify-between p-2">
                         <p className="text-sm text-gray-500">{`${purchasesInCart.length > SHOW_MAXIMUM_PRODUCTS ? purchasesInCart.length - SHOW_MAXIMUM_PRODUCTS : ''} Thêm vào giỏ hàng`}</p>
-                        <Link to={PATH.CART} className="bg-orange rounded px-5 py-2 capitalize text-white">
+                        <Link to={PATH.CART} className="rounded bg-orange px-5 py-2 capitalize text-white">
                           Xem giỏ hàng
                         </Link>
                       </div>

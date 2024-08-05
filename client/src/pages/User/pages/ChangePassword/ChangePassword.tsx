@@ -87,7 +87,7 @@ const ChangePassword = () => {
                 errorMessage={errors.confirm_password?.message}
                 classNameInput="w-full rounded-sm border border-gray-300 px-3 py-2 outline-none focus:border-gray-500 focus:shadow-sm"
               />
-              <Button className="bg-orange hover:bg-orange/90 rounded-sm px-4 py-1 text-white ">Lưu</Button>
+              <Button className="rounded-sm bg-orange px-4 py-1 text-white hover:bg-orange/90 ">Lưu</Button>
             </div>
           </div>
         </div>

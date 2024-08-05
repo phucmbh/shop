@@ -23,7 +23,7 @@ const Product = ({ product }: Props) => {
               <span>₫</span>
               {formatCurrency(product.price_before_discount)}
             </div>
-            <div className="text-orange max-w-[50%] truncate">
+            <div className="max-w-[50%] truncate text-orange">
               <span className="text-xs">₫</span>
               {formatCurrency(product.price)}
             </div>

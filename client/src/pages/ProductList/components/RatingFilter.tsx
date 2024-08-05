@@ -8,7 +8,7 @@ interface Props {
   queryConfig: ProductQueryConfig
 }
 const RatingFilter = ({ queryConfig }: Props) => {
-  const {t} = useTranslation('home')
+  const { t } = useTranslation('home')
   const navigate = useNavigate()
 
   const handleFilterStar = (rating: number) => {

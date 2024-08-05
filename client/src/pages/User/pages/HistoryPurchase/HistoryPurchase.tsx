@@ -64,7 +64,7 @@ const HistoryPurchase = () => {
                   <span className="mr-2 text-sm text-gray-500 line-through">
                     ₫ {formatCurrency(purchase.product.price_before_discount)}
                   </span>
-                  <span className="text-orange text-sm ">₫ {formatCurrency(purchase.product.price)}</span>
+                  <span className="text-sm text-orange ">₫ {formatCurrency(purchase.product.price)}</span>
                 </div>
               </Link>
               <div className="relative w-full border-b border-dotted bg-white">
@@ -76,7 +76,7 @@ const HistoryPurchase = () => {
                 <div className="flex items-center justify-end p-6">
                   <ShopeeGuarantee />
                   <div className="ml-1">Thành tiền: </div>
-                  <div className="text-orange ml-2 text-lg">
+                  <div className="ml-2 text-lg text-orange">
                     ₫ {formatCurrency(purchase.buy_count * purchase.price)}
                   </div>
                 </div>

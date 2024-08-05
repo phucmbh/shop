@@ -1,4 +1,4 @@
-import { ExtendedPurchase } from "@/@types"
+import { ExtendedPurchase } from '@/@types'
 
 interface Props {
   purchases: ExtendedPurchase[]
@@ -25,7 +25,7 @@ const CartTitle = ({ purchases, setPurchases }: Props) => {
             <div className="flex items-center justify-center pr-3">
               <input
                 type="checkbox"
-                className="accent-orange size-5"
+                className="size-5 accent-orange"
                 checked={isAllChecked}
                 onChange={handleCheckeAll}
               />

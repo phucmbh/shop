@@ -65,7 +65,7 @@ const Login = () => {
 
         <div className="mt-3">
           <Button
-            className="bg-orange hover:bg-orange/85 flex w-full items-center  justify-center gap-2 px-2 py-4 text-sm uppercase text-white"
+            className="flex w-full items-center justify-center gap-2  bg-orange px-2 py-4 text-sm uppercase text-white hover:bg-orange/85"
             isLoading={loginMutation.isPending}
             disabled={loginMutation.isPending}
           >

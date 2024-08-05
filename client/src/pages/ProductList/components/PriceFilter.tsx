@@ -83,8 +83,8 @@ const PriceFilter = ({ queryConfig }: Props) => {
           )}
         />
       </div>
-      <div className="text-orange my-1 min-h-5 text-center">{errors.price_min?.message}</div>
-      <Button className="bg-orange hover:bg-orange/80 w-full p-2 uppercase text-white">{t('apply')}</Button>
+      <div className="my-1 min-h-5 text-center text-orange">{errors.price_min?.message}</div>
+      <Button className="w-full bg-orange p-2 uppercase text-white hover:bg-orange/80">{t('apply')}</Button>
     </form>
   )
 }

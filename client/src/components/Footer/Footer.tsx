@@ -10,7 +10,7 @@ const Footer = () => {
           <Link to="/">Chính sách vận chuyển</Link>
           <Link to="/">Chính sách trả hàng và hoàn tiền</Link>
         </div>
-        
+
         <div className="mt-8 grid grid-cols-1 text-center">
           <p className="mt-2">
             Địa chỉ: Tầng 4-5-6, Tòa nhà Capital Place, số 29 đường Liễu Giai, Phường Ngọc Khánh, Quận Ba Đình, Thành

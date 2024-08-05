@@ -91,10 +91,10 @@ const TopHeader = ({ className }: Props) => {
                   <h3>Đăng nhập để xem thông báo</h3>
                 </div>
                 <div className="grid grid-cols-2 text-center">
-                  <Link to={PATH.LOGIN} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
+                  <Link to={PATH.LOGIN} className="bg-slate-50 py-3 hover:bg-slate-200 hover:text-orange">
                     {t('Top Header.Sign up')}
                   </Link>
-                  <Link to={PATH.REGISTER} className="hover:text-orange bg-slate-50 py-3 hover:bg-slate-200">
+                  <Link to={PATH.REGISTER} className="bg-slate-50 py-3 hover:bg-slate-200 hover:text-orange">
                     {t('Top Header.Log in')}
                   </Link>
                 </div>
@@ -118,7 +118,7 @@ const TopHeader = ({ className }: Props) => {
                 <button
                   onClick={() => handleChangeLanguage('vi')}
                   className={clsx(
-                    'hover:text-orange w-full px-2 py-3 text-start hover:bg-slate-50',
+                    'w-full px-2 py-3 text-start hover:bg-slate-50 hover:text-orange',
                     i18n.language === 'vi' && 'text-orange'
                   )}
                 >
@@ -127,7 +127,7 @@ const TopHeader = ({ className }: Props) => {
                 <button
                   onClick={() => handleChangeLanguage('en')}
                   className={clsx(
-                    'hover:text-orange w-full px-2 py-3 text-start hover:bg-slate-50',
+                    'w-full px-2 py-3 text-start hover:bg-slate-50 hover:text-orange',
                     i18n.language === 'en' && 'text-orange'
                   )}
                 >

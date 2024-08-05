@@ -172,7 +172,7 @@ const Profile = () => {
           <div className="mt-6 flex">
             <div className="md:w-1/5 md:min-w-[150px]"></div>
             <div className="md:w-4/5 md:pl-5 ">
-              <Button className="bg-orange hover:bg-orange/90 rounded-sm px-4 py-1 text-white ">Lưu</Button>
+              <Button className="rounded-sm bg-orange px-4 py-1 text-white hover:bg-orange/90 ">Lưu</Button>
             </div>
           </div>
         </div>

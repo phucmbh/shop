@@ -56,7 +56,7 @@ const Cart = () => {
           <div className=" flex h-[500px] flex-col items-center justify-center gap-3 ">
             <img src={noproductImage} className="size-[120px]" />
             <h3 className="text-gray-500">Giỏ hàng của bạn còn trống</h3>
-            <Link to={PATH.HOME} className="bg-orange hover:bg-orange/90 rounded-sm px-10 py-2 uppercase text-white">
+            <Link to={PATH.HOME} className="rounded-sm bg-orange px-10 py-2 uppercase text-white hover:bg-orange/90">
               Mua ngay
             </Link>
           </div>

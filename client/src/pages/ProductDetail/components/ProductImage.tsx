@@ -105,7 +105,7 @@ const ProductImage = ({ product }: Props) => {
                 alt={product.name}
                 className="absolute left-0 top-0 size-full cursor-pointer bg-white object-cover"
               />
-              {isActive && <div className="border-orange z-1 absolute inset-0 size-full cursor-pointer border-2"></div>}
+              {isActive && <div className="z-1 absolute inset-0 size-full cursor-pointer border-2 border-orange"></div>}
             </div>
           )
         })}

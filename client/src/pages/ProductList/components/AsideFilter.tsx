@@ -81,7 +81,7 @@ const AsideFilter = ({ queryConfig }: Props) => {
       <div className="my-4 h-px border border-gray-300"></div>
       <Button
         onClick={handleRemoveAllFilters}
-        className="bg-orange hover:bg-orange/80 w-full p-2 uppercase text-white "
+        className="w-full bg-orange p-2 uppercase text-white hover:bg-orange/80 "
       >
         {t('clear all')}
       </Button>

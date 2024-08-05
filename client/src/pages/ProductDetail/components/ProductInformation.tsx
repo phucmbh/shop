@@ -56,13 +56,13 @@ const ProductInformation = ({ product }: Props) => {
       <h1 className="line-clamp-2 text-xl font-medium uppercase">{product.name}</h1>
       <div className="flex">
         <div className="flex">
-          <span className="border-orange text-orange mr-1 border-b">{product.rating.toFixed(1)}</span>
+          <span className="mr-1 border-b border-orange text-orange">{product.rating.toFixed(1)}</span>
 
           <Rating rating={product.rating} activeClassName="text-orange" />
         </div>
         <div className="mx-4 h-4 w-px bg-gray-300"></div>
         <div>
-          <span className="border-orange mr-1">{formatNumberToSocialStyle(product.sold)}</span>
+          <span className="mr-1 border-orange">{formatNumberToSocialStyle(product.sold)}</span>
           <span className="text-gray-400">{t('sold')}</span>
         </div>
       </div>
@@ -70,8 +70,8 @@ const ProductInformation = ({ product }: Props) => {
         <span className="text-sm  text-gray-400 line-through">
           {`₫ ${formatCurrency(product.price_before_discount)}`}
         </span>
-        <span className="text-orange text-2xl ">{`₫ ${formatCurrency(product.price)}`}</span>
-        <span className="bg-orange rounded-sm px-1 py-px text-xs font-semibold uppercase text-white">
+        <span className="text-2xl text-orange ">{`₫ ${formatCurrency(product.price)}`}</span>
+        <span className="rounded-sm bg-orange px-1 py-px text-xs font-semibold uppercase text-white">
           {percentDiscount(product.price_before_discount, product.price)} {t('down')}
         </span>
       </div>
@@ -91,14 +91,14 @@ const ProductInformation = ({ product }: Props) => {
       </div>
       <div className="flex gap-5">
         <button
-          className="border-orange text-orange flex h-12 min-w-48 items-center justify-center gap-2 rounded-sm border bg-red-50 hover:bg-red-50/30"
+          className="flex h-12 min-w-48 items-center justify-center gap-2 rounded-sm border border-orange bg-red-50 text-orange hover:bg-red-50/30"
           onClick={handleAddToCart}
         >
           <FaCartPlus size={20} />
           <p>{t('add to card')}</p>
         </button>
 
-        <button onClick={handleBuyNow} className=" bg-orange hover:bg-orange/90 h-12 min-w-28 rounded-sm text-white">
+        <button onClick={handleBuyNow} className=" h-12 min-w-28 rounded-sm bg-orange text-white hover:bg-orange/90">
           <p>{t('buy now')}</p>
         </button>
       </div>

@@ -78,10 +78,10 @@ const TotalCart = ({ purchases, setPurchases }: Props) => {
     <div className="sticky bottom-0 z-10 mt-8 flex flex-col rounded-sm border border-gray-100 bg-white p-5 shadow md:flex-row md:items-start  md:gap-4">
       <div className="flex items-center">
         <div className="flex shrink-0 items-center justify-center pr-3">
-          <input type="checkbox" className="accent-orange size-5" checked={isAllChecked} onChange={handleCheckeAll} />
+          <input type="checkbox" className="size-5 accent-orange" checked={isAllChecked} onChange={handleCheckeAll} />
         </div>
         <button className="mx-3 border-none bg-none">Chọn tất cả ({purchases.length})</button>
-        <button className="hover:text-orange mx-3 border-none bg-none" onClick={handleDeletePurchases}>
+        <button className="mx-3 border-none bg-none hover:text-orange" onClick={handleDeletePurchases}>
           Xóa
         </button>
       </div>
@@ -90,11 +90,11 @@ const TotalCart = ({ purchases, setPurchases }: Props) => {
         <div>
           <div className="flex items-center sm:justify-end">
             <div>Tổng thanh toán ({checkedPurchases.length} sản phẩm):</div>
-            <div className="text-orange ml-2 text-2xl">₫ {formatCurrency(totalCheckedPurchasePrice)}</div>
+            <div className="ml-2 text-2xl text-orange">₫ {formatCurrency(totalCheckedPurchasePrice)}</div>
           </div>
           <div className="flex items-center text-sm sm:justify-end">
             <div className="text-gray-500">Tiết kiệm</div>
-            <div className="text-orange ml-6">₫ {formatCurrency(totalCheckedPurchaseSavingPrice)}</div>
+            <div className="ml-6 text-orange">₫ {formatCurrency(totalCheckedPurchaseSavingPrice)}</div>
           </div>
         </div>
         <Button
